@@ -3,22 +3,7 @@ guid: e6921af27a49cdd4e8e6dd6339e7029a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brushed black metal brass
-    second: {fileID: 2100000, guid: 5a21b01ae59a6c34a85d1dd794e274aa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Brushed black metal brass.001
-    second: {fileID: 2100000, guid: e5768b9fe98b0874c897ba3e4e4ed865, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Curveture metal
-    second: {fileID: 2100000, guid: 0f9f6daec1ee20f47808d5eff375ef6b, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
