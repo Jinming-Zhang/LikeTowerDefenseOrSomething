@@ -1615,7 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a2ac820ca4ad042949308ceaa755e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MoveSpeed: {x: 10, y: 10}
+  _MoveSpeed: {x: 100, y: 100}
   _LookSpeed: {x: 10, y: 10}
   _PlayerInput: {fileID: 2000583982}
   _MoveInputAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
