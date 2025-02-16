@@ -7,6 +7,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public float health = 15f;
+    public bool spawnEnemyOnDeath = false;
+    public GameObject SpawnOnDeathEnemy;
 
     public void TakeDamage(float damage)
     {
@@ -20,6 +22,10 @@ public class EnemyHealth : MonoBehaviour
     void Die()
     {
         //Turn on gravity and disable rigidbody lock here
+        if(spawnEnemyOnDeath) 
+        {
+            Instantiate(SpawnOnDeathEnemy);
+        }
         Destroy(gameObject);
     }
 }

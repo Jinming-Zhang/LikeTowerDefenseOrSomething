@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Use Rigidbody X-Z Rotation Constraint
-//Set all Towers, Bases, Etc. Player Related to PlayerObject tag
-
 public class MeleeAiBasic : MonoBehaviour
 {
     [Header("Target")]
@@ -22,11 +19,17 @@ public class MeleeAiBasic : MonoBehaviour
     public float attackSpeed = 2f;
     public float attackCooldownTimer = 0f;
 
+    [Header("Spawning")]
+    public bool spawnEnemies = false;
+    public GameObject enemyToSpawn;
+    public float spawnCooldown = 5f;
+    private float spawnCooldownTimer = 0f;
+
     private Vector3 targetPosition;
 
     void Start()
     {
-        if(basePriority)
+        if (basePriority)
         {
             target = Base;
         }
@@ -41,6 +44,7 @@ public class MeleeAiBasic : MonoBehaviour
         LookAtTarget();
         Move();
         AttemptAttackTarget();
+        HandleEnemySpawning();
     }
 
     public void FindTarget()
@@ -77,19 +81,20 @@ public class MeleeAiBasic : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * moveSpeed);
         }
     }
+
     public void Move()
     {
         Vector3 direction = (transform.position - target.position).normalized;
         targetPosition = target.position + direction;
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
+
     public void AttemptAttackTarget()
     {
         attackCooldownTimer -= Time.deltaTime;
 
         if (target != null && Vector3.Distance(transform.position, target.position) <= attackRange && attackCooldownTimer <= 0)
         {
-            // Insert attack animation here
             attackCooldownTimer = attackSpeed;
 
             PlayerObjectHealth targetHealth = target.GetComponent<PlayerObjectHealth>();
@@ -104,5 +109,28 @@ public class MeleeAiBasic : MonoBehaviour
             targetHealth.TakeDamage(damageToDeal);
         }
     }
+
+    private void HandleEnemySpawning()
+    {
+        if (spawnEnemies)
+        {
+            spawnCooldownTimer -= Time.deltaTime;
+
+            if (spawnCooldownTimer <= 0f)
+            {
+                SpawnEnemy();
+                spawnCooldownTimer = spawnCooldown;
+            }
+        }
+    }
+
+    private void SpawnEnemy()
+    {
+        if (enemyToSpawn != null)
+        {
+            Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+        }
+    }
+
 
 }
