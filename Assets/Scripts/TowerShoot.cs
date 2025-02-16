@@ -11,6 +11,7 @@ public class TowerShoot : MonoBehaviour
     public float batteryRange = 10f;
     public float batteryCapacity = 50f;
     public int shootAmount = 1;
+    public bool trap = false;
 
     private float timeSinceLastShot = 0f;
     private Collider currentTarget = null;
@@ -19,37 +20,47 @@ public class TowerShoot : MonoBehaviour
 
     void Start()
     {
-        FindAndSelectBattery();
+        if (!trap)
+        {
+            FindAndSelectBattery();
+        }
     }
 
     void Update()
     {
-        if (nearbyBattery != null)
+        if (!trap && nearbyBattery == null)
         {
-            timeSinceLastShot += Time.deltaTime;
+            return;  // Don't update if no battery is available and it's not a trap
+        }
 
+        timeSinceLastShot += Time.deltaTime;
+
+        if (!trap)
+        {
             AdjustStatsBasedOnBatteryUsage();
+        }
 
-            if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
-            {
-                currentTarget = FindEnemyInRange();
-            }
+        if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
+        {
+            currentTarget = FindEnemyInRange();
+        }
 
-            if (currentTarget != null && timeSinceLastShot >= reloadTime)
-            {
-                FaceEnemy(currentTarget.transform);
-                StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
-                timeSinceLastShot = 0f;
-            }
-            else if (currentTarget == null)
-            {
-                currentTarget = FindEnemyInRange();
-            }
+        if (currentTarget != null && timeSinceLastShot >= reloadTime)
+        {
+            FaceEnemy(currentTarget.transform);
+            StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
+            timeSinceLastShot = 0f;
+        }
+        else if (currentTarget == null)
+        {
+            currentTarget = FindEnemyInRange();
         }
     }
 
     void FindAndSelectBattery()
     {
+        if (trap) return; // Skip battery selection if it's a trap
+
         Collider[] collidersInRange = Physics.OverlapSphere(transform.position, batteryRange);
         Battery bestBattery = null;
         float highestAvailablePower = -1f;
@@ -123,7 +134,6 @@ public class TowerShoot : MonoBehaviour
 
     IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
     {
-        //put anim here
         EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
         if (enemyHealth != null)
         {
@@ -135,7 +145,6 @@ public class TowerShoot : MonoBehaviour
             }
         }
     }
-
 
     void OnDrawGizmosSelected()
     {
