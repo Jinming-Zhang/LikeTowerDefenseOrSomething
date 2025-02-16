@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowCursor : MonoBehaviour
 {
     public Transform cameraTransform;
-    public PlacementBox placementBox;
+    PlacementBox placementBox;
     
     public string targetMask;
 
