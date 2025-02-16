@@ -10,6 +10,7 @@ public class TowerShoot : MonoBehaviour
     public Transform shootPoint;
     public float batteryRange = 10f;
     public float batteryCapacity = 50f;
+    public int shootAmount = 1;
 
     private float timeSinceLastShot = 0f;
     private Collider currentTarget = null;
@@ -37,7 +38,7 @@ public class TowerShoot : MonoBehaviour
             if (currentTarget != null && timeSinceLastShot >= reloadTime)
             {
                 FaceEnemy(currentTarget.transform);
-                DealDamageToEnemy(currentTarget);
+                StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
                 timeSinceLastShot = 0f;
             }
             else if (currentTarget == null)
@@ -120,14 +121,21 @@ public class TowerShoot : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    void DealDamageToEnemy(Collider enemyCollider)
+    IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
     {
+        //put anim here
         EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
         if (enemyHealth != null)
         {
             enemyHealth.TakeDamage(damage);
+            for (int i = 0; i < shootAmount - 1; i++)
+            {
+                yield return new WaitForSeconds(0.2f);
+                enemyHealth.TakeDamage(damage);
+            }
         }
     }
+
 
     void OnDrawGizmosSelected()
     {
