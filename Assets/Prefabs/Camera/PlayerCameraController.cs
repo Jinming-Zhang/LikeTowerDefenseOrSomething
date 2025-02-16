@@ -8,9 +8,13 @@ using UnityEngine.Serialization;
 public class PlayerCameraController : MonoBehaviour
 {
     [Header("Camera Movement Config")]
-    [SerializeField] private Vector2 _MoveSpeed = new Vector2(10.0f, 10.0f);
+    [SerializeField] private Vector2 _MoveSpeed = new Vector2(5.0f, 5.0f);
+    [SerializeField] private bool _IsSlow = false;
 
-    [SerializeField] private float _ZoomSpeed = 5.0f;
+    [SerializeField] private float _RotationSpeed = 1.0f;
+
+
+    [SerializeField] private float _ZoomSpeed = 3.0f;
     [SerializeField] private bool _InvertY = false;
     [SerializeField] [Range(1, 90)] private float _MaxFov;
 
@@ -28,15 +32,21 @@ public class PlayerCameraController : MonoBehaviour
     private void Awake()
     {
         _Camera = GetComponent<CinemachineCamera>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
+        if (Keyboard.current.shiftKey.isPressed){ _IsSlow = true;}
+        else{ _IsSlow = false;}
+
         Vector3 curPos = transform.position;
         curPos += transform.forward * _MoveInput.y * Time.deltaTime;
         curPos += transform.right * _MoveInput.x * Time.deltaTime;
         transform.position = curPos;
     }
+
 
     private void OnEnable()
     {
@@ -62,7 +72,7 @@ public class PlayerCameraController : MonoBehaviour
 
     void OnPan(InputAction.CallbackContext context)
     {
-        _MoveInput = context.ReadValue<Vector2>() * _MoveSpeed;
+        _MoveInput = context.ReadValue<Vector2>() * _MoveSpeed * 0.5f;
     }
 
     void OnRotateStart(InputAction.CallbackContext context)
@@ -84,7 +94,7 @@ public class PlayerCameraController : MonoBehaviour
 
         Vector2 delta = context.ReadValue<Vector2>();
         Vector3 curRotation = transform.eulerAngles;
-        curRotation.x += _InvertY ? delta.y : -delta.y;
+        curRotation.x += (_InvertY ? delta.y : -delta.y) * _RotationSpeed;
         if (IsLookingUp(delta.y))
         {
             if (curRotation.x > 89 && curRotation.x < 270)
@@ -92,7 +102,6 @@ public class PlayerCameraController : MonoBehaviour
                 curRotation.x = 89;
             }
         }
-
         else
         {
             if (curRotation.x < 270 && curRotation.x > 90)
@@ -101,9 +110,10 @@ public class PlayerCameraController : MonoBehaviour
             }
         }
 
-        curRotation.y += delta.x;
+        curRotation.y += delta.x * _RotationSpeed;
         transform.eulerAngles = curRotation;
     }
+
 
     void OnZoom(InputAction.CallbackContext context)
     {
