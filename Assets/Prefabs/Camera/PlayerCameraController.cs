@@ -32,8 +32,8 @@ public class PlayerCameraController : MonoBehaviour
     private void Awake()
     {
         _Camera = GetComponent<CinemachineCamera>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     void Update()
