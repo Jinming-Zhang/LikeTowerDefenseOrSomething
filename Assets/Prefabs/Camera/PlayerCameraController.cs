@@ -32,8 +32,10 @@ public class PlayerCameraController : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(-_MoveInput.x, 0, -_MoveInput.y) *
-                              Time.deltaTime;
+        Vector3 curPos = transform.position;
+        curPos += transform.forward * _MoveInput.y * Time.deltaTime;
+        curPos += transform.right * _MoveInput.x * Time.deltaTime;
+        transform.position = curPos;
     }
 
     private void OnEnable()
