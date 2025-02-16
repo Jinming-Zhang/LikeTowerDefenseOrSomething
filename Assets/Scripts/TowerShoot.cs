@@ -40,6 +40,12 @@ public class TowerShoot : MonoBehaviour
             AdjustStatsBasedOnBatteryUsage();
         }
 
+        if (trap)
+        {
+            DamageAllEnemiesInRange(); // Hurt all enemies in range if it's a trap
+            return; // Skip the rest of the logic for trap
+        }
+
         if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
         {
             currentTarget = FindEnemyInRange();
@@ -127,6 +133,9 @@ public class TowerShoot : MonoBehaviour
 
     void FaceEnemy(Transform enemyTransform)
     {
+        // No rotation if it's a trap
+        if (trap) return;
+
         Vector3 direction = enemyTransform.position - transform.position;
         direction.y = 0;
         transform.rotation = Quaternion.LookRotation(direction);
@@ -142,6 +151,22 @@ public class TowerShoot : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.2f);
                 enemyHealth.TakeDamage(damage);
+            }
+        }
+    }
+
+    void DamageAllEnemiesInRange()
+    {
+        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, range);
+        foreach (Collider enemy in enemiesInRange)
+        {
+            if (enemy.CompareTag("Enemy"))
+            {
+                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(damage);
+                }
             }
         }
     }
