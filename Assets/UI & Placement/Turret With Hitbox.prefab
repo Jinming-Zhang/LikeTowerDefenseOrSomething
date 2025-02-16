@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2392211964060601209}
   - component: {fileID: 5401754610684692679}
   - component: {fileID: 2340767065117241682}
+  - component: {fileID: 3181921642903727688}
   m_Layer: 7
   m_Name: Turret With Hitbox
   m_TagString: Untagged
@@ -106,6 +107,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 12, y: 12, z: 12}
   m_Center: {x: 0, y: 6, z: 0}
+--- !u!114 &3181921642903727688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6429243749851554696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1f43b4c7c027449956c2ed91a3ad88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  isBase: 0
+  energyUsage: 10
+  displayName: 
+  maxHealth: 15
+  startsAtMaxHealth: 1
 --- !u!1001 &3425369145718963629
 PrefabInstance:
   m_ObjectHideFlags: 0

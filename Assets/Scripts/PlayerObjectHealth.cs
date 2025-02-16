@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerObjectHealth : MonoBehaviour
 {
+
     public float health = 15f;
     public bool isBase = false; //set to true if it is the base; this is for the battery, and we dont need the base to be powered.
     public float energyUsage = 10f;
@@ -24,5 +25,14 @@ public class PlayerObjectHealth : MonoBehaviour
         //Turn on gravity and disable rigidbody lock here
         Destroy(gameObject);
     }
+
+    [Space(15)]
+    // Dax's edits for the UI's sake:
+    public string displayName = ""; // This is for the UI until we get sprites or other images to represent the object.
+    public float maxHealth = 15f; // For HP bar scaling.
+    public bool startsAtMaxHealth = true; // Disable if this is a problem for some reason.
+
+    public void Start()
+    { if(startsAtMaxHealth) { health = maxHealth; } }
 }
 

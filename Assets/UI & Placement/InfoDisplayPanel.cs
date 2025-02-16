@@ -9,13 +9,17 @@ public class InfoDisplayPanel : MonoBehaviour
     public RectTransform hpBar;
     public TMP_Text hpText;
 
-    public void ShowPanel()
+
+    public void ShowPanel(PlayerObjectHealth poh)
     {
-        panelObject.SetActive(true);
+        if (!panelObject.activeSelf) { panelObject.SetActive(true); }
+
+        nameText.text = poh.displayName;
+        hpBar.localScale = new Vector3(poh.health / poh.maxHealth, hpBar.localScale.y, hpBar.localScale.z);
     }
 
     public void HidePanel()
     {
-        panelObject.SetActive(false);
+        if(panelObject.activeSelf) { panelObject.SetActive(false); }
     }
 }
