@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class EnemyWave
+{
+    public List<GameObject> enemies;
+}
+
 public class EnemySpawner : MonoBehaviour
 {
-    //update this into waves later
-    public GameObject enemyPrefab;
     public float spawnInterval = 3f;
+    public List<EnemyWave> enemyWaves;
     public Transform spawnPoint;
+
+    private int currentWaveIndex = 0;
+    private int currentEnemyIndex = 0;
 
     private void Start()
     {
@@ -18,7 +26,27 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            if (currentWaveIndex < enemyWaves.Count)
+            {
+                List<GameObject> currentWave = enemyWaves[currentWaveIndex].enemies;
+
+                if (currentEnemyIndex < currentWave.Count)
+                {
+                    GameObject enemyToSpawn = currentWave[currentEnemyIndex];
+                    Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
+                    currentEnemyIndex++;
+                }
+                else
+                {
+                    currentWaveIndex++;
+                    currentEnemyIndex = 0;
+                }
+            }
+            else
+            {
+                break;
+            }
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }
