@@ -22,7 +22,7 @@ public class TurretSelectBox : MonoBehaviour
         if(isATurret != null)
         {
             nameText.text = isATurret.displayName;
-            dmgText.text = 0; //Ask about damage... 
+            dmgText.text = 0 + ""; //Ask about damage... 
         }
 
         Battery isABattery = prefabReference.GetComponent<Battery>();
