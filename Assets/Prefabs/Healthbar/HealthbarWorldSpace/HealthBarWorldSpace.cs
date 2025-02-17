@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthBarWorldSpace : MonoBehaviour
 {
-    private EnemyHealth _Health;
+    [SerializeField] private EnemyHealth _HealthTarget;
     private float _InitialHealth;
     private float _CurrentHealth;
 
@@ -18,12 +19,12 @@ public class HealthBarWorldSpace : MonoBehaviour
 
     private void Update()
     {
-        if (_Health == null)
+        if (_HealthTarget == null)
         {
             return;
         }
 
-        _CurrentHealth = _Health.health;
+        _CurrentHealth = _HealthTarget.health;
         _Foreground.fillAmount = Mathf.Clamp01(_CurrentHealth / _InitialHealth);
     }
 
@@ -34,20 +35,23 @@ public class HealthBarWorldSpace : MonoBehaviour
 
     private void Init()
     {
-        _Health = GetComponent<EnemyHealth>();
-        if (_Health == null)
+        if (_HealthTarget == null)
         {
-            _Health = GetComponentInParent<EnemyHealth>();
+            _HealthTarget = GetComponent<EnemyHealth>();
+            if (_HealthTarget == null)
+            {
+                _HealthTarget = GetComponentInParent<EnemyHealth>();
+            }
+
+            if (_HealthTarget == null)
+            {
+                Debug.LogError(
+                    $"HealthBarUI: Cannot find {_HealthTarget.GetType().Name} component to show health!");
+                return;
+            }
         }
 
-        if (_Health == null)
-        {
-            Debug.LogError(
-                $"HealthBarUI: Cannot find {_Health.GetType().Name} component to show health!");
-            return;
-        }
-
-        _InitialHealth = _Health.health;
+        _InitialHealth = _HealthTarget.health;
         _CurrentHealth = _InitialHealth;
         _Foreground.fillAmount = _CurrentHealth / _InitialHealth;
     }

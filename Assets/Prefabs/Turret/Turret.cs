@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Turret : MonoBehaviour
 {
     [Header("Attack Settings")]
@@ -18,12 +17,6 @@ public class Turret : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private Color _GizmosColor = Color.cyan;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()

@@ -4,54 +4,92 @@ using UnityEngine;
 
 public class LaserWeapon : Weapon
 {
-    [SerializeField] private float _DmgPerShoot = 1;
-    [SerializeField] private float _ShootDuration = 0.3f;
+    [Header("Weapon Config")]
+    [SerializeField] private float _Radius = 0.2f;
+
+    [SerializeField] private float _MaxRange = 10.0f;
+    [SerializeField] private float _DmgPerSec = 2;
+    [SerializeField] private LayerMask _DamageLayers;
+
+    [Header("Visuals")]
     [SerializeField] private LaserLine _LaserVisual;
-    [SerializeField] private float _ShootCd = 1;
-    private float _CdCounter;
+
+    [Header("Debug")]
+    [SerializeField] private Color _DebugRangeColor = Color.red;
+
+    private GameObject _CurrentTarget;
 
     private void Awake()
     {
         _LaserVisual.SetActive(false);
-        _CdCounter = 0;
     }
 
     public override void Shoot(GameObject target)
     {
-        if (_CdCounter > 0)
+        if (_CurrentTarget == target)
         {
             return;
         }
 
-        _CdCounter = _ShootCd;
-        StartCoroutine(ShootCR(target));
+        _CurrentTarget = target;
+        StopAllCoroutines();
+        StartCoroutine(ShootCR());
     }
 
-    private IEnumerator ShootCR(GameObject target)
+    private IEnumerator ShootCR()
     {
-        float timer = _ShootDuration;
-        float dmgPerSec = _DmgPerShoot / _ShootDuration;
-        _LaserVisual.SetLaserPoints(transform, target.transform);
+        _LaserVisual.SetLaserPoints(transform, _CurrentTarget.transform);
         _LaserVisual.SetActive(true);
-        do
-        {
-            yield return new WaitForEndOfFrame();
-            _LaserVisual.SetLaserPoints(transform, target.transform);
-            timer -= Time.deltaTime;
-            _CdCounter -= Time.deltaTime;
-            float dmg = dmgPerSec * Time.deltaTime;
-            if (target != null)
-            {
-                EnemyHealth health = target.GetComponent<EnemyHealth>();
-                health.health -= dmg;
-            }
-        } while (timer > 0);
 
-        _LaserVisual.SetActive(false);
-        if (_CdCounter > 0)
+        while (IsTargetValid())
         {
-            yield return new WaitForSeconds(_CdCounter);
-            _CdCounter = 0;
+            Vector3 laserDirection = _CurrentTarget.transform.position - transform.position;
+            _LaserVisual.SetLaserPoints(transform, _CurrentTarget.transform);
+            float dmg = _DmgPerSec * Time.deltaTime;
+
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, _Radius, laserDirection, laserDirection.magnitude, _DamageLayers);
+            foreach (RaycastHit hit in hits)
+            {
+                EnemyHealth health = hit.collider.gameObject.GetComponent<EnemyHealth>();
+                if (health != null)
+                {
+                    health.health -= dmg;
+                }
+            }
+
+            yield return new WaitForEndOfFrame();
         }
+
+        _CurrentTarget = null;
+        _LaserVisual.SetActive(false);
+    }
+
+    private bool IsTargetValid()
+    {
+        if (_CurrentTarget == null)
+        {
+            return false;
+        }
+
+        if (Vector3.Distance(_CurrentTarget.transform.position, transform.position) > _MaxRange)
+        {
+            return false;
+        }
+
+        EnemyHealth health = _CurrentTarget.GetComponent<EnemyHealth>();
+        if (health != null && health.health <= 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        var oldClr = Gizmos.color;
+        Gizmos.color = _DebugRangeColor;
+        Gizmos.DrawWireSphere(transform.position, _MaxRange);
+        Gizmos.color = oldClr;
     }
 }
