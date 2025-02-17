@@ -9,8 +9,9 @@ public class TurretPlacer: MonoBehaviour
     public bool dropTurretOnPlace;
 
     PlacementBox placementBox;
+    RangeSphere rangeSphere;
 
-    private void Awake() { placementBox = GetComponent<PlacementBox>(); }
+    private void Awake() { placementBox = GetComponent<PlacementBox>(); rangeSphere = GetComponent<RangeSphere>(); }
 
     public void Update()
     {
@@ -37,11 +38,21 @@ public class TurretPlacer: MonoBehaviour
         if(collider == null) { Debug.LogError("Object needs a collider to scale the PlacementBox!"); }
         else { placementBox.RescaleBox(new Vector3(collider.size.x, collider.size.y, collider.size.z)); }
 
+
+        Turret isATurret = turret.GetComponent<Turret>();
+        if (isATurret != null)
+        { rangeSphere.AdjustScale(isATurret.range); rangeSphere.ShowSphere(true); }
+
+        Battery isABattery = turret.GetComponent<Battery>();
+        if (isABattery != null)
+        { rangeSphere.AdjustScale(isABattery.range); rangeSphere.ShowSphere(true); }
+
     }
 
     public void DeselectTurret()
     {
         heldTurret = null;
         placementBox.ShowBox(false);
+        rangeSphere.ShowSphere(false);
     }
 }
