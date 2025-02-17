@@ -21,21 +21,24 @@ public class FollowCursor : MonoBehaviour
         RaycastHit hitInfo = new RaycastHit();
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        //Ray fakeCamRay = new Ray(Camera.main.transform.position, camRay.direction);
+
+        Debug.DrawRay(camRay.origin, camRay.direction * 10, Color.yellow);
+
         PlacementScan(camRay, hitInfo);
         InfoScan(camRay, hitInfo);
     }
 
     public void PlacementScan(Ray camRay, RaycastHit hitInfo)
     {
-        bool hitSomething = Physics.Raycast(camRay, out hitInfo, 100f, LayerMask.GetMask(placementMasks));
-        Debug.Log("Great...");
-        if (hitSomething)
-        { Debug.Log("Hit still?"); transform.position = hitInfo.point; }
+        bool hitSomething = Physics.Raycast(camRay, out hitInfo, 1000f, LayerMask.GetMask(placementMasks));
+
+        if (hitSomething) { transform.position = hitInfo.point; }
     }
 
     public void InfoScan(Ray camRay, RaycastHit hitInfo)
     {
-        bool hitSomething = Physics.Raycast(camRay, out hitInfo, 100f, LayerMask.GetMask(infoMasks));
+        bool hitSomething = Physics.Raycast(camRay, out hitInfo, 1000f, LayerMask.GetMask(infoMasks));
 
         if (hitSomething)
         {

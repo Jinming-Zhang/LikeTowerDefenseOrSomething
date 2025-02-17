@@ -16,6 +16,8 @@ public class InfoDisplayPanel : MonoBehaviour
 
         nameText.text = poh.displayName;
         hpBar.localScale = new Vector3(poh.health / poh.maxHealth, hpBar.localScale.y, hpBar.localScale.z);
+
+        hpText.text = poh.health.ToString("00") + " / " + poh.maxHealth.ToString("00");
     }
 
     public void HidePanel()

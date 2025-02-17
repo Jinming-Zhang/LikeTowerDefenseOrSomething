@@ -1,19 +1,21 @@
 using UnityEngine;
 
-public class HasLabel : MonoBehaviour
+public class HasLabel : PlayerObjectHealth
 {
     public RectTransform labelPrefab; // The object will spawn this in on Start.
     RectTransform label;
-    public Vector3 offset;
+    public bool isHPBar;
 
-    public void Start()
+    //public Vector3 offset;
+
+    public new void Start()
     {
+        base.Start();
+
         Canvas c = FindFirstObjectByType<Canvas>();
         label = Instantiate(labelPrefab, c.transform);
-    }
 
-    private void Update()
-    {
-        label.position = Camera.main.WorldToScreenPoint(transform.position + offset);
+        FloatingHP bar = label.GetComponent<FloatingHP>();
+        if(bar != null) { bar.AssignHP(this); }
     }
 }
