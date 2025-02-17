@@ -13,18 +13,31 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3f;
     public List<EnemyWave> enemyWaves;
     public Transform spawnPoint;
+    public Resources resources;
 
     private int currentWaveIndex = 0;
     private int currentEnemyIndex = 0;
+
+    public bool waveRunning = true;
 
     private void Start()
     {
         StartCoroutine(SpawnEnemies());
     }
 
+    private void Update()
+    {
+        if(!waveRunning)
+        {
+            waveRunning = true;
+            Debug.Log(waveRunning);
+            StartCoroutine(SpawnEnemies());
+        }
+    }
+
     private IEnumerator SpawnEnemies()
     {
-        while (true)
+        while (waveRunning)
         {
             if (currentWaveIndex < enemyWaves.Count)
             {
@@ -32,14 +45,20 @@ public class EnemySpawner : MonoBehaviour
 
                 if (currentEnemyIndex < currentWave.Count)
                 {
-                    GameObject enemyToSpawn = currentWave[currentEnemyIndex];
-                    Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
+                    GameObject toSpawn = currentWave[currentEnemyIndex];
+                    GameObject enemy = Instantiate(toSpawn, spawnPoint.position, spawnPoint.rotation);
+                    if (enemy.tag != "Spawner Modifiers")
+                    {
+                        enemy.tag = "Enemy";
+                    }
+
                     currentEnemyIndex++;
                 }
                 else
                 {
                     currentWaveIndex++;
                     currentEnemyIndex = 0;
+                    CheckWaveStatus();
                 }
             }
             else
@@ -48,6 +67,17 @@ public class EnemySpawner : MonoBehaviour
             }
 
             yield return new WaitForSeconds(spawnInterval);
+        }
+
+        //CheckWaveStatus();
+    }
+
+    private void CheckWaveStatus()
+    {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            waveRunning = false;
+            if (resources.gainFromWave) { resources.amount += (currentWaveIndex + 1) * resources.gainFromWaveMultiplyer; }
         }
     }
 }

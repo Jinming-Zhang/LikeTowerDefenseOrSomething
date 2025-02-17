@@ -30,7 +30,7 @@ public class TowerShoot : MonoBehaviour
     {
         if (!trap && nearbyBattery == null)
         {
-            return;  // Don't update if no battery is available and it's not a trap
+            return;
         }
 
         timeSinceLastShot += Time.deltaTime;
@@ -42,8 +42,8 @@ public class TowerShoot : MonoBehaviour
 
         if (trap)
         {
-            DamageAllEnemiesInRange(); // Hurt all enemies in range if it's a trap
-            return; // Skip the rest of the logic for trap
+            DamageAllEnemiesInRange();
+            return;
         }
 
         if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
@@ -65,7 +65,7 @@ public class TowerShoot : MonoBehaviour
 
     void FindAndSelectBattery()
     {
-        if (trap) return; // Skip battery selection if it's a trap
+        if (trap) return;
 
         Collider[] collidersInRange = Physics.OverlapSphere(transform.position, batteryRange);
         Battery bestBattery = null;
@@ -133,7 +133,7 @@ public class TowerShoot : MonoBehaviour
 
     void FaceEnemy(Transform enemyTransform)
     {
-        // No rotation if it's a trap
+        //Only top half needs to face
         if (trap) return;
 
         Vector3 direction = enemyTransform.position - transform.position;

@@ -6,13 +6,21 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public Resources resources;
     public float health = 15f;
+    public float maxHealth;
     public bool spawnEnemyOnDeath = false;
     public GameObject SpawnOnDeathEnemy;
+
+    public void Start()
+    {
+        maxHealth = health;
+    }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        if(resources.gainFromDamage) { resources.amount += 1; }
         if (health <= 0)
         {
             Die();
@@ -26,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
         {
             Instantiate(SpawnOnDeathEnemy);
         }
+        if (resources.gainFromKill) { resources.amount += maxHealth; }
         Destroy(gameObject);
     }
 }
