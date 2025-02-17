@@ -45,9 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf5b95e611800e643ab094aa79e760fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _DmgPerShoot: 1
-  _ShootDuration: 0.3
+  _Radius: 0.2
+  _MaxRange: 10
+  _DmgPerSec: 2
+  _DamageLayers:
+    serializedVersion: 2
+    m_Bits: 0
   _LaserVisual: {fileID: 1358324798360680029}
+  _DebugRangeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &7035886435805887808
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,28 +138,32 @@ PrefabInstance:
       value: laser
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bebe4a123ae48f145a38cd391d8cf5dc, type: 2}
+    - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: 11.607004
+      value: -4.89
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: 16.818203
+      value: 7.73
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[0].z
-      value: 12.487578
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: 11.607004
+      value: -4.89
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: 16.818203
+      value: 7.73
       objectReference: {fileID: 0}
     - target: {fileID: 8708265463138820865, guid: 20d4743497f764746914fdfafc646cb7, type: 3}
       propertyPath: m_Positions.Array.data[1].z
-      value: 20.247578
+      value: 7.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
