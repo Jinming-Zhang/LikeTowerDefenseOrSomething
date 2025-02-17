@@ -39,4 +39,9 @@ public class LaserLine : MonoBehaviour
         _LineRenderer.SetPosition(0, _Start.position);
         _LineRenderer.SetPosition(1, _End.position);
     }
+
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
+    }
 }
