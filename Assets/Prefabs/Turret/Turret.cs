@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class Turret : MonoBehaviour
 {
     [Header("Attack Settings")]
@@ -13,15 +12,11 @@ public class Turret : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private Transform _WeaponSocket;
 
-    [SerializeField] private LaserLine _LaserLine;
+    [SerializeField] private Weapon _Weapon;
+
 
     [Header("Debug")]
     [SerializeField] private Color _GizmosColor = Color.cyan;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,11 +30,6 @@ public class Turret : MonoBehaviour
             Physics.OverlapSphere(transform.position, _Range, _TargetLayers);
         if (hits.Length <= 0)
         {
-            if (_LaserLine != null)
-            {
-                _LaserLine.gameObject.SetActive(false);
-            }
-
             return;
         }
 
@@ -53,13 +43,7 @@ public class Turret : MonoBehaviour
         });
 
         Transform target = hitList[0].transform;
-        if (_LaserLine == null)
-        {
-            return;
-        }
-
-        _LaserLine.gameObject.SetActive(true);
-        _LaserLine.SetLaserPoints(_WeaponSocket, target);
+        _Weapon.Shoot(target.gameObject);
     }
 
     private void OnDrawGizmos()
