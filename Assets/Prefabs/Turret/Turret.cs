@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private float _Range;
+    public float range { get { return _Range; } } // I need to read this for UI purposes - Dax
 
     [SerializeField] private LayerMask _TargetLayers;
 
