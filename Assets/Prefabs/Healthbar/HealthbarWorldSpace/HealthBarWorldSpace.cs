@@ -27,6 +27,11 @@ public class HealthBarWorldSpace : MonoBehaviour
         _Foreground.fillAmount = Mathf.Clamp01(_CurrentHealth / _InitialHealth);
     }
 
+    private void LateUpdate()
+    {
+        transform.forward = Camera.main.transform.forward;
+    }
+
     private void Init()
     {
         _Health = GetComponent<EnemyHealth>();
