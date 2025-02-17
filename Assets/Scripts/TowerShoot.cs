@@ -12,6 +12,7 @@ public class TowerShoot : MonoBehaviour
     public float batteryCapacity = 50f;
     public int shootAmount = 1;
     public bool trap = false;
+    public Transform pivotPoint;
 
     private float timeSinceLastShot = 0f;
     private Collider currentTarget = null;
@@ -133,12 +134,11 @@ public class TowerShoot : MonoBehaviour
 
     void FaceEnemy(Transform enemyTransform)
     {
-        //Only top half needs to face
-        if (trap) return;
+        if (trap || pivotPoint == null) return;
 
-        Vector3 direction = enemyTransform.position - transform.position;
+        Vector3 direction = enemyTransform.position - pivotPoint.position;
         direction.y = 0;
-        transform.rotation = Quaternion.LookRotation(direction);
+        pivotPoint.rotation = Quaternion.LookRotation(direction);
     }
 
     IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
