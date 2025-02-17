@@ -19,6 +19,9 @@ public class LaserWeapon : Weapon
 
     private GameObject _CurrentTarget;
 
+    [Header("Rotation Settings")]
+    [SerializeField] private Transform _Pivot;
+
     private void Awake()
     {
         _LaserVisual.SetActive(false);
@@ -91,5 +94,22 @@ public class LaserWeapon : Weapon
         Gizmos.color = _DebugRangeColor;
         Gizmos.DrawWireSphere(transform.position, _MaxRange);
         Gizmos.color = oldClr;
+    }
+
+    private void RotateTowardsTarget()
+    {
+        if (_Pivot != null && _CurrentTarget != null)
+        {
+            Vector3 direction = _CurrentTarget.transform.position - _Pivot.position;
+            direction.y = 0;
+            direction.x -= 90;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            _Pivot.rotation = lookRotation;
+        }
+    }
+
+    private void Update()
+    {
+        RotateTowardsTarget();
     }
 }
