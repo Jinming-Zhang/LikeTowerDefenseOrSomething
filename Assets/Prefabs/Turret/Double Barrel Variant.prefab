@@ -119,7 +119,8 @@ MonoBehaviour:
   health: 15
   isBase: 0
   energyUsage: 10
-  displayName: 
+  metalCost: 45
+  displayName: Twin Turret
   maxHealth: 15
   startsAtMaxHealth: 1
 --- !u!114 &9032692939357443956

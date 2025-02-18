@@ -124,7 +124,8 @@ MonoBehaviour:
   health: 15
   isBase: 0
   energyUsage: 10
-  displayName: 
+  metalCost: 65
+  displayName: Railgun
   maxHealth: 15
   startsAtMaxHealth: 1
 --- !u!114 &5226745562748508691

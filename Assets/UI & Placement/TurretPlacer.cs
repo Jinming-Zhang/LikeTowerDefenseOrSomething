@@ -23,8 +23,9 @@ public class TurretPlacer: MonoBehaviour
 
     public void PlaceTurret()
     {
-        if(!placementBox.canPlace) { Debug.LogWarning("Can't place there."); return; }
-        else if (heldTurret == null) { Debug.LogError("No turret selected!"); return; }
+        if (heldTurret == null) { return; }
+        else if (!placementBox.canPlace) { Debug.LogWarning("Can't place there."); return; }
+
         Instantiate(heldTurret, transform.position, transform.rotation);
         if(dropTurretOnPlace) { DeselectTurret(); }
     }

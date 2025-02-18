@@ -105,7 +105,8 @@ MonoBehaviour:
   health: 15
   isBase: 0
   energyUsage: 0
-  displayName: 
+  metalCost: 15
+  displayName: Battery Pack
   maxHealth: 15
   startsAtMaxHealth: 1
 --- !u!65 &4996111880640078413

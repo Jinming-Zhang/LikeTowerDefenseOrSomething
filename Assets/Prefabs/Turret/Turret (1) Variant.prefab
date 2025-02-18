@@ -119,7 +119,8 @@ MonoBehaviour:
   health: 10
   isBase: 0
   energyUsage: 10
-  displayName: 
+  metalCost: 15
+  displayName: Turret
   maxHealth: 10
   startsAtMaxHealth: 1
 --- !u!114 &7197993642885777436

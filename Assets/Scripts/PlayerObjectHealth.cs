@@ -10,6 +10,10 @@ public class PlayerObjectHealth : MonoBehaviour
     public float health = 15f;
     public bool isBase = false; //set to true if it is the base; this is for the battery, and we dont need the base to be powered.
     public float energyUsage = 10f;
+    [Space(15)]
+    public int metalCost = 0;
+    // Added here for UI because it's the script shared between the battery and turrets. - Dax
+
 
     public void TakeDamage(float damage)
     {

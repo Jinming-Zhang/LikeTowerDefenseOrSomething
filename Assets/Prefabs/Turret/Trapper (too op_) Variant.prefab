@@ -119,7 +119,8 @@ MonoBehaviour:
   health: 3
   isBase: 0
   energyUsage: 10
-  displayName: 
+  metalCost: 100
+  displayName: Trapper
   maxHealth: 15
   startsAtMaxHealth: 1
 --- !u!114 &7757100244816917626
