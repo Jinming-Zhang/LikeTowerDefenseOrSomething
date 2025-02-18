@@ -40,7 +40,7 @@ public class TurretPlacer: MonoBehaviour
         else { placementBox.RescaleBox(new Vector3(collider.size.x, collider.size.y, collider.size.z)); }
 
 
-        Turret isATurret = turret.GetComponent<Turret>();
+        TowerShoot isATurret = turret.GetComponent<TowerShoot>();
         if (isATurret != null)
         { rangeSphere.AdjustScale(isATurret.range); rangeSphere.ShowSphere(true); }
 

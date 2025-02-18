@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Turret : PlayerObjectHealth
+public class Turret : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private float _Range;

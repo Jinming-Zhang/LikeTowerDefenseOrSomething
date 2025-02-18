@@ -9,20 +9,29 @@ public class TurretSelectBox : MonoBehaviour
     [Space(20)]
     public GameObject infoDisplay;
     public TMP_Text nameText;
-    public TMP_Text dmgText;
     public TMP_Text hpText;
+    [Space(15)]
+    public TMP_Text dmgText;
     public TMP_Text reloadText;
+    public TMP_Text rangeText;
     public TMP_Text pwrText;
 
 
     private void Start()
     {
-        Turret isATurret = prefabReference.GetComponent<Turret>();
-
-        if(isATurret != null)
+        PlayerObjectHealth poh = prefabReference.GetComponent<PlayerObjectHealth>();
+        if(poh != null)
         {
-            nameText.text = isATurret.displayName;
-            dmgText.text = 0 + ""; //Ask about damage... 
+            nameText.text = poh.displayName;
+            hpText.text = poh.health.ToString("000") + " / " + poh.health.ToString("000");
+        }
+
+        TowerShoot twr = prefabReference.GetComponent<TowerShoot>();
+        if(twr != null)
+        {
+            dmgText.text = twr.damage.ToString("00");
+            reloadText.text = twr.reloadTime.ToString("00") + "s";
+            rangeText.text = twr.range.ToString("000");
         }
 
         Battery isABattery = prefabReference.GetComponent<Battery>();
