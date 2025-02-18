@@ -5,9 +5,13 @@ public class FollowCursor : MonoBehaviour
     public Transform cameraTransform;
     PlacementBox placementBox;
     InfoDisplayPanel infoDisplayer;
-    
+    [Space(15)]
     public string[] placementMasks;
     public string[] infoMasks;
+    [Space(15)]
+    [Header("Read Only")]
+    public PlayerObjectHealth seenTurret;
+
 
     private void Awake()
     {
@@ -42,13 +46,14 @@ public class FollowCursor : MonoBehaviour
 
         if (hitSomething)
         {
-            PlayerObjectHealth poh = hitInfo.collider.GetComponent<PlayerObjectHealth>();
-            if (poh != null) { infoDisplayer.ShowPanel(poh); }
+            seenTurret = hitInfo.collider.GetComponent<PlayerObjectHealth>();
+            if (seenTurret != null) { infoDisplayer.ShowPanel(seenTurret); }
             else { infoDisplayer.HidePanel(); }
         }
         else
         {
             infoDisplayer.HidePanel();
+            seenTurret = null;
         }
     }
 }

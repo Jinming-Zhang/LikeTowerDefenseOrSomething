@@ -22,6 +22,7 @@ public class TurretSelectBox : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     private void Start()
     {
+        #region Setting infoDisplay values
         PlayerObjectHealth poh = prefabReference.GetComponent<PlayerObjectHealth>();
         if(poh != null)
         {
@@ -42,32 +43,33 @@ public class TurretSelectBox : MonoBehaviour, IPointerEnterHandler, IPointerExit
         Battery bat = prefabReference.GetComponent<Battery>();
         if (bat != null)
         {
-            dmgText.text = twr.damage.ToString("--");
-            reloadText.text = twr.reloadTime.ToString("-.--") + "s";
-            rangeText.text = twr.range.ToString("---") + "m";
+            dmgText.text = "--";
+            reloadText.text = "-.--" + "s";
+            rangeText.text = bat.range.ToString("---") + "m";
             pwrText.text = bat.capacity.ToString("00");
         }
+        #endregion
+        
+        // Ignore this one
+        #region Setting Up Button
+        /*Button attachedButton = GetComponent<Button>();
+
+        if(attachedButton == null) { Debug.LogError(gameObject.name + " needs a button!"); }
+        else
+        { attachedButton.onClick.AddListener(SelectTurret); }*/
+        #endregion
     }
 
-    //Detect if the Cursor starts to pass over the GameObject
     public void OnPointerEnter(PointerEventData pointerEventData)
-    {
-        //Output to console the GameObject's name and the following message
-        Debug.Log("Cursor Entering " + name + " GameObject");
-        infoDisplay.SetActive(true);
-    }
+    { infoDisplay.SetActive(true); }
 
-    //Detect when Cursor leaves the GameObject
     public void OnPointerExit(PointerEventData pointerEventData)
-    {
-        //Output the following message with the GameObject's name
-        Debug.Log("Cursor Exiting " + name + " GameObject");
-        infoDisplay.SetActive(false);
-    }
+    { infoDisplay.SetActive(false); }
 
     public void SelectTurret()
     {
         TurretPlacer tp = FindFirstObjectByType<TurretPlacer>();
-        tp.SelectTurret(prefabReference);
+        if (tp == null) { Debug.LogError(gameObject.name + ": No TurretPlacer in scene!?"); }
+        else { tp.SelectTurret(prefabReference); }
     }
 }

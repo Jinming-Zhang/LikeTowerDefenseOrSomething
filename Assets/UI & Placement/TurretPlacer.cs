@@ -4,27 +4,40 @@ public class TurretPlacer: MonoBehaviour
 {
     // This script says "turret" but it can work with any GameObject we assign it to.
 
-    [Header("Read Only")]
-    public GameObject heldTurret;
     public bool dropTurretOnPlace;
+    public bool deleteMode = false;
 
     PlacementBox placementBox;
     RangeSphere rangeSphere;
+    FollowCursor followCursor;
 
-    private void Awake() { placementBox = GetComponent<PlacementBox>(); rangeSphere = GetComponent<RangeSphere>(); }
+    [Header("Read Only")]
+    public GameObject heldTurret;
+
+    private void Awake()
+    {
+        placementBox = GetComponent<PlacementBox>();
+        rangeSphere = GetComponent<RangeSphere>();
+        followCursor = GetComponent<FollowCursor>();
+    }
 
     public void Update()
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            PlaceTurret();
+            if (deleteMode) { TryDeleteTurret(); }
+            if (heldTurret != null) { PlaceTurret(); }
+        }
+        else if (Input.GetButtonDown("Fire2"))
+        {
+            if (deleteMode) { EnableDeleteMode(false); }
+            if (heldTurret != null) { DeselectTurret(); }
         }
     }
 
     public void PlaceTurret()
     {
-        if (heldTurret == null) { return; }
-        else if (!placementBox.canPlace) { Debug.LogWarning("Can't place there."); return; }
+        if (!placementBox.canPlace) { Debug.LogWarning("Can't place there."); return; }
 
         Instantiate(heldTurret, transform.position, transform.rotation);
         if(dropTurretOnPlace) { DeselectTurret(); }
@@ -56,5 +69,16 @@ public class TurretPlacer: MonoBehaviour
         heldTurret = null;
         placementBox.ShowBox(false);
         rangeSphere.ShowSphere(false);
+    }
+
+    public void EnableDeleteMode(bool enterDeleteMode)
+    {
+        deleteMode = enterDeleteMode;
+        if (deleteMode) { DeselectTurret(); }
+    }
+    public void TryDeleteTurret()
+    {
+        if(followCursor.seenTurret != null)
+        { Destroy(followCursor.seenTurret.gameObject); }
     }
 }
