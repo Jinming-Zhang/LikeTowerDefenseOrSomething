@@ -10,6 +10,7 @@ public class TurretPlacer: MonoBehaviour
     PlacementBox placementBox;
     RangeSphere rangeSphere;
     FollowCursor followCursor;
+    public GameObject deleteIcon;
 
     [Header("Read Only")]
     public GameObject heldTurret;
@@ -74,8 +75,24 @@ public class TurretPlacer: MonoBehaviour
     public void EnableDeleteMode(bool enterDeleteMode)
     {
         deleteMode = enterDeleteMode;
-        if (deleteMode) { DeselectTurret(); }
+        if (deleteMode)
+        {
+            ToggleDeleteIcon(true);
+            DeselectTurret();
+        }
+        else
+        { ToggleDeleteIcon(false); }
     }
+
+    public void ToggleDeleteIcon(bool isActive)
+    {
+        if(deleteIcon == null)
+        {
+            Debug.LogError("[" + gameObject.name + "]: Please drag the Delete Icon under UI Cursor Follower into its respective slot (under \"TurretPlacer\") in the inspector.");
+        }
+        else { deleteIcon.SetActive(isActive); }
+    }
+
     public void TryDeleteTurret()
     {
         if(followCursor.seenTurret != null)

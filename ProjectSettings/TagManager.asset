@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Original
   - Spawner Modifiers
+  - DeleteIcon
   layers:
   - Default
   - TransparentFX
