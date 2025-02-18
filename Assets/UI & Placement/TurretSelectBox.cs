@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class TurretSelectBox : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    // Note: Space between panels is 78 units.
+
     public GameObject prefabReference;
     public TMP_Text costText;
     [Space(20)]
