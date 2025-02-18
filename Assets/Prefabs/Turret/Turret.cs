@@ -6,7 +6,11 @@ public class Turret : MonoBehaviour
 {
     [Header("Attack Settings")]
     [SerializeField] private float _Range;
-    public float range { get { return _Range; } } // I need to read this for UI purposes - Dax
+
+    public float range
+    {
+        get { return _Range; }
+    } // I need to read this for UI purposes - Dax
 
     [SerializeField] private LayerMask _TargetLayers;
 
@@ -16,22 +20,28 @@ public class Turret : MonoBehaviour
     [SerializeField] private Weapon _Weapon;
 
 
+    [SerializeField] private List<GameObject> _TurretHeads;
+
     [Header("Debug")]
     [SerializeField] private Color _GizmosColor = Color.cyan;
 
     // Update is called once per frame
     void Update()
     {
-        CheckTargets();
+        Transform target = CheckTargets();
+        if (target != null)
+        {
+            ShootTarget(target);
+        }
     }
 
-    private void CheckTargets()
+    private Transform CheckTargets()
     {
         Collider[] hits =
             Physics.OverlapSphere(transform.position, _Range, _TargetLayers);
         if (hits.Length <= 0)
         {
-            return;
+            return null;
         }
 
         List<Collider> hitList = hits.ToList();
@@ -44,7 +54,31 @@ public class Turret : MonoBehaviour
         });
 
         Transform target = hitList[0].transform;
+        return target;
+    }
+
+    private void ShootTarget(Transform target)
+    {
         _Weapon.Shoot(target.gameObject);
+        foreach (GameObject turretHead in _TurretHeads)
+        {
+            RotateToTarget(turretHead.transform, target);
+        }
+    }
+
+    private void RotateToTarget(Transform src, Transform target)
+    {
+        Vector3 tarloc = target.position;
+        tarloc.y = transform.position.y;
+        Vector3 targetRight = src.position - tarloc;
+        float dot = Vector3.Dot(src.right.normalized, targetRight.normalized);
+        float angle = Mathf.Acos(dot);
+        bool rotLeft = Vector3.Cross(targetRight, src.right).y <= 0;
+        angle = rotLeft ? angle : -angle;
+        src.RotateAround(transform.position, Vector3.up, angle);
+        // Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.up);
+        // src.rotation = targetRotation;
+        // src.RotateAround(transform.position, Vector3.up, 0);
     }
 
     private void OnDrawGizmos()
