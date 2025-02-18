@@ -6,7 +6,11 @@ public class Turret : PlayerObjectHealth
 {
     [Header("Attack Settings")]
     [SerializeField] private float _Range;
-    public float range { get { return _Range; } } // I need to read this for UI purposes - Dax
+
+    public float range
+    {
+        get { return _Range; }
+    } // I need to read this for UI purposes - Dax
 
     [SerializeField] private LayerMask _TargetLayers;
 
@@ -16,22 +20,28 @@ public class Turret : PlayerObjectHealth
     [SerializeField] private Weapon _Weapon;
 
 
+    [SerializeField] private List<GameObject> _TurretHeads;
+
     [Header("Debug")]
     [SerializeField] private Color _GizmosColor = Color.cyan;
 
     // Update is called once per frame
     void Update()
     {
-        CheckTargets();
+        Transform target = CheckTargets();
+        if (target != null)
+        {
+            ShootTarget(target);
+        }
     }
 
-    private void CheckTargets()
+    private Transform CheckTargets()
     {
         Collider[] hits =
             Physics.OverlapSphere(transform.position, _Range, _TargetLayers);
         if (hits.Length <= 0)
         {
-            return;
+            return null;
         }
 
         List<Collider> hitList = hits.ToList();
@@ -44,7 +54,23 @@ public class Turret : PlayerObjectHealth
         });
 
         Transform target = hitList[0].transform;
+        return target;
+    }
+
+    private void ShootTarget(Transform target)
+    {
         _Weapon.Shoot(target.gameObject);
+        foreach (GameObject turretHead in _TurretHeads)
+        {
+            RotateToTarget(turretHead.transform, target);
+        }
+    }
+
+    private void RotateToTarget(Transform src, Transform target)
+    {
+        Vector3 right = src.position - target.position;
+        right.Scale(new Vector3(1, 0, 1));
+        src.right = right;
     }
 
     private void OnDrawGizmos()
