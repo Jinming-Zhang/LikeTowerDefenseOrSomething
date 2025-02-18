@@ -47,7 +47,16 @@ public class FollowCursor : MonoBehaviour
         if (hitSomething)
         {
             seenTurret = hitInfo.collider.GetComponent<PlayerObjectHealth>();
-            if (seenTurret != null) { infoDisplayer.ShowPanel(seenTurret); }
+            TowerShoot tower = seenTurret.GetComponent<TowerShoot>();
+            Battery bat = seenTurret.GetComponent<Battery>();
+
+            if (seenTurret != null)
+            {
+                if(tower != null) { infoDisplayer.ShowPanel(seenTurret, tower); }
+                else if (bat != null) { infoDisplayer.ShowPanel(seenTurret, bat); }
+                else { infoDisplayer.ShowPanel(seenTurret); }
+
+            }
             else { infoDisplayer.HidePanel(); }
         }
         else

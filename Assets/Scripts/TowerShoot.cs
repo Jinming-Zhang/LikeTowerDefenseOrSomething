@@ -19,6 +19,8 @@ public class TowerShoot : MonoBehaviour
     private Battery nearbyBattery = null;
     private float batteryUsed = 0f;
 
+    public Battery NearbyBattery { get { return nearbyBattery; } } // Using this for UI. - Dax
+
     void Start()
     {
         if (!trap)

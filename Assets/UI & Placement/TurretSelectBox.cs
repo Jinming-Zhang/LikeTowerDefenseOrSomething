@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class TurretSelectBox : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class TurretSelectBox : MonoBehaviour
 {
     // Note: Space between panels is 78 units.
 
@@ -60,11 +60,7 @@ public class TurretSelectBox : MonoBehaviour, IPointerEnterHandler, IPointerExit
         #endregion
     }
 
-    public void OnPointerEnter(PointerEventData pointerEventData)
-    { infoDisplay.SetActive(true); }
 
-    public void OnPointerExit(PointerEventData pointerEventData)
-    { infoDisplay.SetActive(false); }
 
     public void SelectTurret()
     {
