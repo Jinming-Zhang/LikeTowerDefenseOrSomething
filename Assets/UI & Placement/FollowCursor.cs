@@ -44,7 +44,7 @@ public class FollowCursor : MonoBehaviour
     {
         bool hitSomething = Physics.Raycast(camRay, out hitInfo, 1000f, LayerMask.GetMask(infoMasks));
 
-        if (hitSomething)
+        if (hitSomething && !hoverObstructed)
         {
             seenTurret = hitInfo.collider.GetComponent<PlayerObjectHealth>();
             TowerShoot tower = seenTurret.GetComponent<TowerShoot>();
@@ -65,4 +65,8 @@ public class FollowCursor : MonoBehaviour
             seenTurret = null;
         }
     }
+
+    public bool hoverObstructed = false;
+    public void ObstructHover(bool obstructed)
+    { hoverObstructed = obstructed; }
 }

@@ -24,6 +24,8 @@ public class TurretPlacer: MonoBehaviour
 
     public void Update()
     {
+        if(hoverObstructed) { return; }
+
         if(Input.GetButtonDown("Fire1"))
         {
             if (deleteMode) { TryDeleteTurret(); }
@@ -98,4 +100,8 @@ public class TurretPlacer: MonoBehaviour
         if(followCursor.seenTurret != null)
         { Destroy(followCursor.seenTurret.gameObject); }
     }
+
+    public bool hoverObstructed = false;
+    public void ObstructHover(bool obstructed)
+    { hoverObstructed = obstructed; }
 }

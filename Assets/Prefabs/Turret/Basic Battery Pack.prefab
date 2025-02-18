@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
       propertyPath: m_LocalPosition.x
       value: -67.11001
@@ -48,13 +52,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6733177361254619370, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
       propertyPath: m_Name
       value: Basic Battery Pack
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
       propertyPath: m_TagString
       value: PlayerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704327836215651521, guid: 88a41ac64a5e9bc4aa19752d8f861704, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

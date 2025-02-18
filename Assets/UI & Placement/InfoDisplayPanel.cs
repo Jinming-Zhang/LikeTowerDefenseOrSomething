@@ -13,6 +13,7 @@ public class InfoDisplayPanel : MonoBehaviour
     public RectTransform pwrBar;
     public TMP_Text pwrText;
     public RectTransform pwrOverfillBar;
+    public RectTransform pwrTextBacking;
     [Space(15)]
     [Header("Read Only")]
     public PlayerObjectHealth referencePOH;
@@ -62,20 +63,25 @@ public class InfoDisplayPanel : MonoBehaviour
             if(referenceTower.NearbyBattery != null)
             {
                 pwrBar.transform.localScale = new Vector3(1f, hpBar.localScale.y, hpBar.localScale.z);
+                pwrOverfillBar.transform.localScale = new Vector3(0f, hpBar.localScale.y, hpBar.localScale.z);
                 pwrText.text = "POWERED";
+                pwrTextBacking.localScale = new Vector3(1.75f, 1f, 1f);
             }
             else
             {
                 pwrBar.transform.localScale = new Vector3(0f, hpBar.localScale.y, hpBar.localScale.z);
+                pwrOverfillBar.transform.localScale = new Vector3(0f, hpBar.localScale.y, hpBar.localScale.z);
                 pwrText.text = "UNPOWERED";
+                pwrTextBacking.localScale = new Vector3(1.75f, 1f, 1f);
             }
         }
 
         if(referenceBattery != null)
         {
             pwrText.text = referenceBattery.used.ToString("00") + " / " + referenceBattery.capacity.ToString("00");
+            pwrTextBacking.localScale = new Vector3(1f, 1f, 1f);
 
-            if(referenceBattery.used > referenceBattery.capacity)
+            if (referenceBattery.used > referenceBattery.capacity)
             {
                 pwrBar.transform.localScale = new Vector3(1f, hpBar.localScale.y, hpBar.localScale.z);
                 pwrOverfillBar.transform.localScale =

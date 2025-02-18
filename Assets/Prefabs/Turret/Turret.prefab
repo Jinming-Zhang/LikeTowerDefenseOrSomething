@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2392211964060601209}
   - component: {fileID: 5401754610684692679}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7206760242367292481}
   - component: {fileID: 4334788977067127721}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,6 +188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
       objectReference: {fileID: 0}
+    - target: {fileID: 1376410539128075826, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1754136339951850726, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.199164
@@ -220,6 +224,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
       objectReference: {fileID: 0}
+    - target: {fileID: 2523612807385556249, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552679428656792095, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311432352752501818, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3319922533697028977, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3381563135790887153, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2154576
@@ -251,6 +271,10 @@ PrefabInstance:
     - target: {fileID: 3381563135790887153, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817626556187531203, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3837329384849432297, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -328,9 +352,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4667207994511992476, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5116559053508135288, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5209705110468385551, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_Name
       value: LaserTurret
+      objectReference: {fileID: 0}
+    - target: {fileID: 5209705110468385551, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5451952526831117129, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -367,6 +403,26 @@ PrefabInstance:
     - target: {fileID: 5451952526831117129, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 5630792446097945963, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694965640232432710, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791554838076774253, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5791749137431445875, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274277536701470808, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6882157244923713041, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
@@ -476,6 +532,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
       objectReference: {fileID: 0}
+    - target: {fileID: 7596152439419169545, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8352758163763710664, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4875345
@@ -511,6 +571,14 @@ PrefabInstance:
     - target: {fileID: 8352758163763710664, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -10.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745195673696567839, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8787135695836769773, guid: 652afb6d1570f9241ac65df84cb7cd19, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -594,6 +662,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LaserWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 346235299886684883, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077072178795887327, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[0].x
       value: -4.73
@@ -617,6 +693,10 @@ PrefabInstance:
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[1].z
       value: 7.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 3784011386126455791, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4699968618901462390, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -665,6 +745,14 @@ PrefabInstance:
     - target: {fileID: 5024283483773974931, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: _DamageLayers.m_Bits
       value: 320
+      objectReference: {fileID: 0}
+    - target: {fileID: 6005886252655491117, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7035886435805887808, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

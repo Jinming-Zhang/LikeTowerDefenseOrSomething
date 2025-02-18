@@ -1954,11 +1954,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6931337628299304546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 122.50001, y: 0}
-  m_SizeDelta: {x: 220.63, y: 56.6}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 22.094994, y: 0.000019836478}
+  m_SizeDelta: {x: 48.1, y: 56.6}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7880554248208209705
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2052,7 +2052,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 171.68211, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.8037147, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
