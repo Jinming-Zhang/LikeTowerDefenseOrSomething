@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Battery : PlayerObjectHealth
+public class Battery : MonoBehaviour
 {
     public float range = 10f;
     public float capacity = 50f;
