@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -77,7 +78,7 @@ public class EnemySpawner : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             waveRunning = false;
-            if (resources.gainFromWave) { resources.amount += (currentWaveIndex + 1) * resources.gainFromWaveMultiplyer; }
+            if (resources.gainFromWave) { resources.amount += (float)Math.Pow((currentWaveIndex + 1) * resources.gainFromWaveMultiplyer,1.2); }
         }
     }
 }
