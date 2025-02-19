@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 1746971497129066607}
   - component: {fileID: 6015011495288924708}
   m_Layer: 2
-  m_Name: Placement Marker
+  m_Name: Placement Marker 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
