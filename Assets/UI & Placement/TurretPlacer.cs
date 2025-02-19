@@ -8,17 +8,21 @@ public class TurretPlacer: MonoBehaviour
     public bool deleteMode = false;
 
     PlacementBox placementBox;
-    RangeSphere rangeSphere;
+    [SerializeField] RangeSphere energyRangeSphere;
+    [SerializeField] RangeSphere threatRangeSphere;
     FollowCursor followCursor;
+    [Space(15)]
     public GameObject deleteIcon;
+    public GameObject placementMessage;
+    public GameObject deletionMessage;
 
+    [Space(15)]
     [Header("Read Only")]
     public GameObject heldTurret;
 
     private void Awake()
     {
         placementBox = GetComponent<PlacementBox>();
-        rangeSphere = GetComponent<RangeSphere>();
         followCursor = GetComponent<FollowCursor>();
     }
 
@@ -59,19 +63,32 @@ public class TurretPlacer: MonoBehaviour
 
         TowerShoot isATurret = turret.GetComponent<TowerShoot>();
         if (isATurret != null)
-        { rangeSphere.AdjustScale(isATurret.range); rangeSphere.ShowSphere(true); }
+        {
+            threatRangeSphere.AdjustScale(isATurret.range); threatRangeSphere.ShowSphere(true);
+            energyRangeSphere.AdjustScale(isATurret.batteryRange); energyRangeSphere.ShowSphere(true);
+        }
 
         Battery isABattery = turret.GetComponent<Battery>();
         if (isABattery != null)
-        { rangeSphere.AdjustScale(isABattery.range); rangeSphere.ShowSphere(true); }
+        {
+            energyRangeSphere.AdjustScale(isABattery.range); energyRangeSphere.ShowSphere(true);
+            threatRangeSphere.ShowSphere(false);
+        }
 
+        EnableDeleteMode(false);
+        //if (placementMessage == null) { Debug.LogWarning("No delete mode message detected."); }
+        //else { placementMessage.SetActive(true); }
     }
 
     public void DeselectTurret()
     {
         heldTurret = null;
         placementBox.ShowBox(false);
-        rangeSphere.ShowSphere(false);
+        threatRangeSphere.ShowSphere(false);
+        energyRangeSphere.ShowSphere(false);
+
+        //if(placementMessage == null) { Debug.LogWarning("No delete mode message detected."); }
+        //else { placementMessage.SetActive(false); }
     }
 
     public void EnableDeleteMode(bool enterDeleteMode)
@@ -93,6 +110,10 @@ public class TurretPlacer: MonoBehaviour
             Debug.LogError("[" + gameObject.name + "]: Please drag the Delete Icon under UI Cursor Follower into its respective slot (under \"TurretPlacer\") in the inspector.");
         }
         else { deleteIcon.SetActive(isActive); }
+
+        if (deletionMessage == null)
+        { Debug.LogWarning("No delete mode message detected."); }
+        else { deletionMessage.SetActive(isActive); }
     }
 
     public void TryDeleteTurret()
