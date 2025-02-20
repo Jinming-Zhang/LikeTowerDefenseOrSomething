@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class PathNode : MonoBehaviour
 {
-    [SerializeField] private bool _UseChildNodes = true;
     [SerializeField] private List<PathNode> _Next = new();
     [SerializeField] private Bounds _SampleArea;
 
@@ -18,19 +14,24 @@ public class PathNode : MonoBehaviour
 
     private void Awake()
     {
-        if (_UseChildNodes)
+        InitPath();
+    }
+
+    [ContextMenu("Init Path")]
+    public void InitPath()
+    {
+        _Next = new();
+        foreach (Transform child in transform)
         {
-            _Next = new();
-            foreach (Transform child in transform)
+            PathNode p = child.GetComponent<PathNode>();
+            if (p != null)
             {
-                PathNode p = child.GetComponent<PathNode>();
-                if (p != null)
-                {
-                    _Next.Add(p);
-                }
+                // p.InitPath();
+                _Next.Add(p);
             }
         }
     }
+
 
     public virtual Vector3 SamplePoint()
     {

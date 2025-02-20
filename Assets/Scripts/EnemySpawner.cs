@@ -20,6 +20,7 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemyIndex = 0;
 
     public bool waveRunning = true;
+    [SerializeField] private PathNode _EnemyPathStart;
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if(!waveRunning)
+        if (!waveRunning)
         {
             waveRunning = true;
             Debug.Log(waveRunning);
@@ -48,6 +49,7 @@ public class EnemySpawner : MonoBehaviour
                 {
                     GameObject toSpawn = currentWave[currentEnemyIndex];
                     GameObject enemy = Instantiate(toSpawn, spawnPoint.position, spawnPoint.rotation);
+                    InitializeEnemy(enemy);
                     if (enemy.tag != "Spawner Modifiers")
                     {
                         enemy.tag = "Enemy";
@@ -78,7 +80,21 @@ public class EnemySpawner : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
             waveRunning = false;
-            if (resources.gainFromWave) { resources.amount += (float)Math.Pow((currentWaveIndex + 1) * resources.gainFromWaveMultiplyer,1.2); }
+            if (resources.gainFromWave)
+            {
+                resources.amount += (float)Math.Pow((currentWaveIndex + 1) * resources.gainFromWaveMultiplyer, 1.2);
+            }
         }
+    }
+
+    private void InitializeEnemy(GameObject spawnedEnemyGo)
+    {
+        EnemyBase enemy = spawnedEnemyGo.GetComponent<EnemyBase>();
+        if (enemy == null || _EnemyPathStart == null)
+        {
+            return;
+        }
+
+        enemy.Initialize(_EnemyPathStart);
     }
 }
