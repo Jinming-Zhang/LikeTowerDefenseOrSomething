@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,7 +82,7 @@ public class EnemySpawner : MonoBehaviour
             waveRunning = false;
             if (resources.gainFromWave)
             {
-                resources.amount += (currentWaveIndex + 1) * resources.gainFromWaveMultiplyer;
+                resources.amount += (float)Math.Pow((currentWaveIndex + 1) * resources.gainFromWaveMultiplyer, 1.2);
             }
         }
     }

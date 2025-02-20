@@ -68,18 +68,16 @@ public class Turret : MonoBehaviour
 
     private void RotateToTarget(Transform src, Transform target)
     {
-        Vector3 tarloc = target.position;
-        tarloc.y = transform.position.y;
-        Vector3 targetRight = src.position - tarloc;
-        float dot = Vector3.Dot(src.right.normalized, targetRight.normalized);
-        float angle = Mathf.Acos(dot);
-        bool rotLeft = Vector3.Cross(targetRight, src.right).y <= 0;
-        angle = rotLeft ? angle : -angle;
-        src.RotateAround(transform.position, Vector3.up, angle);
-        // Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.up);
-        // src.rotation = targetRotation;
-        // src.RotateAround(transform.position, Vector3.up, 0);
+        Vector3 targetDirection = target.position - src.position;
+        targetDirection.y = 0;
+        targetDirection.x += 0;
+
+        if (targetDirection.sqrMagnitude > 0f)
+        {
+            src.rotation = Quaternion.LookRotation(targetDirection);
+        }
     }
+
 
     private void OnDrawGizmos()
     {
