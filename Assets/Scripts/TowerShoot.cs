@@ -18,8 +18,9 @@ public class TowerShoot : MonoBehaviour
     private Collider currentTarget = null;
     private Battery nearbyBattery = null;
     private float batteryUsed = 0f;
+    public List<Transform> turretHeads = new List<Transform>();
 
-    public Battery NearbyBattery { get { return nearbyBattery; } } // Using this for UI. - Dax
+    public Battery NearbyBattery { get { return nearbyBattery; } }
 
     void Start()
     {
@@ -31,10 +32,7 @@ public class TowerShoot : MonoBehaviour
 
     void Update()
     {
-        if (!trap && nearbyBattery == null)
-        {
-            return;
-        }
+        if (!trap && nearbyBattery == null) return;
 
         timeSinceLastShot += Time.deltaTime;
 
@@ -63,6 +61,11 @@ public class TowerShoot : MonoBehaviour
         else if (currentTarget == null)
         {
             currentTarget = FindEnemyInRange();
+        }
+
+        if (currentTarget != null)
+        {
+            RotateTurretHeads(currentTarget.transform);
         }
     }
 
@@ -143,6 +146,19 @@ public class TowerShoot : MonoBehaviour
         pivotPoint.rotation = Quaternion.LookRotation(direction);
     }
 
+    void RotateTurretHeads(Transform target)
+    {
+        foreach (Transform turretHead in turretHeads)
+        {
+            Vector3 targetDirection = target.position - turretHead.position;
+            targetDirection.y = 0; 
+            if (targetDirection.sqrMagnitude > 0f)
+            {
+                turretHead.rotation = Quaternion.LookRotation(targetDirection);
+            }
+        }
+    }
+
     IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
     {
         EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
@@ -170,6 +186,16 @@ public class TowerShoot : MonoBehaviour
                     enemyHealth.TakeDamage(damage);
                 }
             }
+        }
+    }
+
+    public void ShootAtTarget(Transform target)
+    {
+        if (trap) return;
+        Collider targetCollider = target.GetComponent<Collider>();
+        if (targetCollider != null)
+        {
+            currentTarget = targetCollider;
         }
     }
 
