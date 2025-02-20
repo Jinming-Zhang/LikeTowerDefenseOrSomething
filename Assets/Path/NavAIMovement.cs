@@ -8,25 +8,24 @@ public class NavAIMovement : MonoBehaviour
 {
     private NavMeshAgent _Agent;
     [SerializeField] private PathNode _PathNode;
-    [SerializeField] private float _Tolerance = 1.0f;
-    [SerializeField] private bool _MoveOnAwake = true;
-
+    [SerializeField] private float _Tolerance = 60.0f;
 
     private Coroutine _MoveCoroutine;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void Initialize(float mvSpd, PathNode pathStartNode)
+    {
+        _Agent.speed = mvSpd;
+        _PathNode = pathStartNode;
+    }
+
     private void Awake()
     {
         _Agent = GetComponent<NavMeshAgent>();
-        if (_PathNode != null && _MoveOnAwake)
-        {
-            FollowPath();
-        }
     }
 
     private void Update()
     {
-        if (_PathNode == null)
+        if (_PathNode == null || !_Agent.enabled)
         {
             return;
         }
@@ -43,17 +42,6 @@ public class NavAIMovement : MonoBehaviour
         _Agent.SetDestination(_PathNode.SamplePoint());
     }
 
-    public void AssignPath(PathNode head)
-    {
-        _PathNode = head;
-    }
-
-    public void FollowPath()
-    {
-        // StopAllCoroutines();
-        // StartCoroutine(MoveCr());
-    }
-
     public void Pause()
     {
         _Agent.enabled = false;
@@ -63,9 +51,4 @@ public class NavAIMovement : MonoBehaviour
     {
         _Agent.enabled = true;
     }
-
-    // private IEnumerable MoveCr()
-    // {
-    //     yield return null;
-    // }
 }

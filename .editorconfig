@@ -1,0 +1,6 @@
+
+[*]
+
+# ReSharper properties
+resharper_csharp_blank_lines_around_field = 0
+resharper_max_attribute_length_for_same_line = 80
