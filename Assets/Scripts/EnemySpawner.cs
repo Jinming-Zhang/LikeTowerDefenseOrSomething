@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
     private int currentWaveIndex = 0;
     private int currentEnemyIndex = 0;
 
-    public bool waveRunning = true;
+    public bool waveRunning = false;
     [SerializeField] private PathNode _EnemyPathStart;
 
     private void Start()
@@ -27,14 +27,10 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
-    private void Update()
+    public void StartWave()
     {
-        if (!waveRunning)
-        {
-            waveRunning = true;
-            Debug.Log(waveRunning);
-            StartCoroutine(SpawnEnemies());
-        }
+        waveRunning = true;
+        StartCoroutine(SpawnEnemies());
     }
 
     private IEnumerator SpawnEnemies()
