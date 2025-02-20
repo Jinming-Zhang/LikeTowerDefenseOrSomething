@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class HealthBarWorldSpace : MonoBehaviour
 {
-    [SerializeField] private EnemyHealth _HealthTarget;
+    [SerializeField] private HealthComponent _HealthTarget;
     private float _InitialHealth;
     private float _CurrentHealth;
 
     [SerializeField]
     private Image _Foreground;
 
-    private void Awake()
+    private void Start()
     {
         Init();
     }
@@ -24,7 +24,7 @@ public class HealthBarWorldSpace : MonoBehaviour
             return;
         }
 
-        _CurrentHealth = _HealthTarget.health;
+        _CurrentHealth = _HealthTarget.GetCurrentHealth();
         _Foreground.fillAmount = Mathf.Clamp01(_CurrentHealth / _InitialHealth);
     }
 
@@ -37,10 +37,10 @@ public class HealthBarWorldSpace : MonoBehaviour
     {
         if (_HealthTarget == null)
         {
-            _HealthTarget = GetComponent<EnemyHealth>();
+            _HealthTarget = GetComponent<HealthComponent>();
             if (_HealthTarget == null)
             {
-                _HealthTarget = GetComponentInParent<EnemyHealth>();
+                _HealthTarget = GetComponentInParent<HealthComponent>();
             }
 
             if (_HealthTarget == null)
@@ -51,7 +51,7 @@ public class HealthBarWorldSpace : MonoBehaviour
             }
         }
 
-        _InitialHealth = _HealthTarget.health;
+        _InitialHealth = _HealthTarget.GetMaxHealth();
         _CurrentHealth = _InitialHealth;
         _Foreground.fillAmount = _CurrentHealth / _InitialHealth;
     }

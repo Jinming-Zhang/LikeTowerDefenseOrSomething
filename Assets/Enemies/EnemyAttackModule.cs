@@ -30,6 +30,9 @@ public class EnemyAttackModule : MonoBehaviour
 
     private void DoAttack(EnemyAttackable target)
     {
+        Vector3 forwardDir = target.transform.position - transform.position;
+        forwardDir.y = transform.position.y;
+        transform.forward = forwardDir;
         _AtkCdCounter = 1.0f / _AtkSpeedPerSec;
         target.TakeDamage(_Damage);
     }

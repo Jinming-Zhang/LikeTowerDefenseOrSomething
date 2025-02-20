@@ -56,7 +56,7 @@ public class LaserWeapon : Weapon
                 EnemyHealth health = hit.collider.gameObject.GetComponent<EnemyHealth>();
                 if (health != null)
                 {
-                    health.health -= dmg;
+                    health.TakeDamage(dmg);
                 }
             }
 

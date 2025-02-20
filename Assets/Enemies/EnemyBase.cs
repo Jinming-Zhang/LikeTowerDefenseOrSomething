@@ -15,7 +15,6 @@ public class EnemyBase : MonoBehaviour
 
     private NavAIMovement _MovementModule;
     private EnemyAttackModule _AttackModule;
-    private EnemyHealth _EnemyHealth;
     [Header("Debug")]
     [SerializeField] private Color _RangeColor = Color.red;
 
@@ -23,14 +22,12 @@ public class EnemyBase : MonoBehaviour
     {
         _MovementModule = GetComponent<NavAIMovement>();
         _AttackModule = GetComponent<EnemyAttackModule>();
-        _EnemyHealth = GetComponent<EnemyHealth>();
     }
 
     public void Initialize(PathNode navPath)
     {
         _MovementModule.Initialize(_MoveSpeed, navPath);
         _AttackModule.Initialize(_Damage, _AtkSpeedPerSec);
-        _EnemyHealth.health = _Health;
     }
 
 
@@ -39,7 +36,7 @@ public class EnemyBase : MonoBehaviour
         if (TryGetAttackTarget(out EnemyAttackable target))
         {
             _MovementModule.Pause();
-            target.TakeDamage(_Damage);
+            _AttackModule.Attack(target);
         }
         else
         {

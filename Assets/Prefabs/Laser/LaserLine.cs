@@ -25,7 +25,10 @@ public class LaserLine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateLineRendererPosition();
+        if (_Start != null && _End != null)
+        {
+            UpdateLineRendererPosition();
+        }
     }
 
     public void SetLaserPoints(Transform start, Transform end)
