@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,179 +32,162 @@ public class TowerShoot : MonoBehaviour
     }
 
     void Update()
-    {
-        if (!trap && nearbyBattery == null) return;
-
-        timeSinceLastShot += Time.deltaTime;
-
-        if (!trap)
         {
-            AdjustStatsBasedOnBatteryUsage();
-        }
+            if (!trap && nearbyBattery == null) return;
 
-        if (trap)
-        {
-            DamageAllEnemiesInRange();
-            return;
-        }
+            timeSinceLastShot += Time.deltaTime;
 
-        if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
-        {
-            currentTarget = FindEnemyInRange();
-        }
-
-        if (currentTarget != null && timeSinceLastShot >= reloadTime)
-        {
-            FaceEnemy(currentTarget.transform);
-            StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
-            timeSinceLastShot = 0f;
-        }
-        else if (currentTarget == null)
-        {
-            currentTarget = FindEnemyInRange();
-        }
-
-        if (currentTarget != null)
-        {
-            RotateTurretHeads(currentTarget.transform);
-        }
-    }
-
-    void FindAndSelectBattery()
-    {
-        if (trap) return;
-
-        Collider[] collidersInRange = Physics.OverlapSphere(transform.position, batteryRange);
-        Battery bestBattery = null;
-        float highestAvailablePower = -1f;
-
-        foreach (Collider collider in collidersInRange)
-        {
-            if (collider.CompareTag("PlayerObject"))
+            if (!trap)
             {
-                Battery battery = collider.GetComponent<Battery>();
-                if (battery != null)
+                AdjustStatsBasedOnBatteryUsage();
+            }
+
+            if (trap)
+            {
+                DamageAllEnemiesInRange();
+                return;
+            }
+
+            if (currentTarget != null && Vector3.Distance(transform.position, currentTarget.transform.position) > range)
+            {
+                currentTarget = FindEnemyInRange();
+            }
+
+            if (currentTarget != null && timeSinceLastShot >= reloadTime)
+            {
+                FaceEnemy(currentTarget.transform);
+                StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
+                timeSinceLastShot = 0f;
+            }
+            else if (currentTarget == null)
+            {
+                currentTarget = FindEnemyInRange();
+            }
+
+            if (currentTarget != null)
+            {
+                RotateTurretHeads(currentTarget.transform);
+            }
+        }
+
+        void FindAndSelectBattery()
+        {
+            if (trap) return;
+
+            Collider[] collidersInRange = Physics.OverlapSphere(transform.position, batteryRange);
+            Battery bestBattery = null;
+            float highestAvailablePower = -1f;
+
+            foreach (Collider collider in collidersInRange)
+            {
+                if (collider.CompareTag("PlayerObject"))
                 {
-                    float availablePower = battery.capacity - battery.used;
-                    if (availablePower > highestAvailablePower)
+                    Battery battery = collider.GetComponent<Battery>();
+                    if (battery != null)
                     {
-                        highestAvailablePower = availablePower;
-                        bestBattery = battery;
+                        float availablePower = battery.capacity - battery.used;
+                        if (availablePower > highestAvailablePower)
+                        {
+                            highestAvailablePower = availablePower;
+                            bestBattery = battery;
+                        }
                     }
                 }
             }
-        }
 
-        if (bestBattery != null)
-        {
-            nearbyBattery = bestBattery;
-            transform.SetParent(nearbyBattery.transform);
-        }
-    }
-
-    void AdjustStatsBasedOnBatteryUsage()
-    {
-        if (nearbyBattery != null)
-        {
-            batteryUsed = nearbyBattery.used;
-            if (batteryUsed > batteryCapacity)
+            if (bestBattery != null)
             {
-                float usageFactor = batteryUsed / batteryCapacity;
-                damage /= usageFactor;
-                reloadTime *= usageFactor;
+                nearbyBattery = bestBattery;
+                transform.SetParent(nearbyBattery.transform);
             }
         }
-    }
 
-    Collider FindEnemyInRange()
-    {
-        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, range);
-        float closestDistance = Mathf.Infinity;
-        Collider closestEnemy = null;
-
-        foreach (Collider enemy in enemiesInRange)
+        void AdjustStatsBasedOnBatteryUsage()
         {
-            if (enemy.CompareTag("Enemy"))
+            if (nearbyBattery != null)
             {
-                float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                if (distance < closestDistance)
+                batteryUsed = nearbyBattery.used;
+                if (batteryUsed > batteryCapacity)
                 {
-                    closestDistance = distance;
-                    closestEnemy = enemy;
+                    float usageFactor = batteryUsed / batteryCapacity;
+                    damage /= usageFactor;
+            if (enemy.CompareTag("Enemy"))
+                    {
+                        float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (distance < closestDistance)
+                        {
+                            closestDistance = distance;
+                            closestEnemy = enemy;
+                        }
+                    }
+                }
+
+                return closestEnemy;
+            }
+
+            void FaceEnemy(Transform enemyTransform)
+            {
+                if (trap || pivotPoint == null) return;
+
+                Vector3 direction = enemyTransform.position - pivotPoint.position;
+                direction.y = 0;
+                pivotPoint.rotation = Quaternion.LookRotation(direction);
+            }
+
+            void RotateTurretHeads(Transform target)
+            {
+                foreach (Transform turretHead in turretHeads)
+                {
+                    Vector3 targetDirection = target.position - turretHead.position;
+                    targetDirection.y = 0;
+                    if (targetDirection.sqrMagnitude > 0f)
+                    {
+                        turretHead.rotation = Quaternion.LookRotation(targetDirection);
+                    }
                 }
             }
-        }
 
-        return closestEnemy;
-    }
-
-    void FaceEnemy(Transform enemyTransform)
-    {
-        if (trap || pivotPoint == null) return;
-
-        Vector3 direction = enemyTransform.position - pivotPoint.position;
-        direction.y = 0;
-        pivotPoint.rotation = Quaternion.LookRotation(direction);
-    }
-
-    void RotateTurretHeads(Transform target)
-    {
-        foreach (Transform turretHead in turretHeads)
-        {
-            Vector3 targetDirection = target.position - turretHead.position;
-            targetDirection.y = 0; 
-            if (targetDirection.sqrMagnitude > 0f)
+            IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
             {
-                turretHead.rotation = Quaternion.LookRotation(targetDirection);
-            }
-        }
-    }
-
-    IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
-    {
-        EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
-        {
-            enemyHealth.TakeDamage(damage);
-            for (int i = 0; i < shootAmount - 1; i++)
-            {
-                yield return new WaitForSeconds(0.2f);
-                enemyHealth.TakeDamage(damage);
-            }
-        }
-    }
-
-    void DamageAllEnemiesInRange()
-    {
-        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, range);
-        foreach (Collider enemy in enemiesInRange)
-        {
-            if (enemy.CompareTag("Enemy"))
-            {
-                EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(damage);
+                    for (int i = 0; i < shootAmount - 1; i++)
+                    {
+                        yield return new WaitForSeconds(0.2f);
+                        enemyHealth.TakeDamage(damage);
+                    }
                 }
             }
-        }
-    }
 
-    public void ShootAtTarget(Transform target)
-    {
-        if (trap) return;
-        Collider targetCollider = target.GetComponent<Collider>();
-        if (targetCollider != null)
-        {
-            currentTarget = targetCollider;
+            void DamageAllEnemiesInRange()
+            {
+                Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, range);
+                foreach (Collider enemy in enemiesInRange)
+                {
+                    if (enemy.CompareTag("Enemy"))
+                    {
+                        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+                        if (enemyHealth != null)
         }
-    }
+                }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, batteryRange);
-    }
-}
+                public void ShootAtTarget(Transform target)
+                {
+                    if (trap) return;
+                    Collider targetCollider = target.GetComponent<Collider>();
+                    if (targetCollider != null)
+                    {
+                        currentTarget = targetCollider;
+                    }
+                }
+
+                void OnDrawGizmosSelected()
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireSphere(transform.position, range);
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(transform.position, batteryRange);
+                }
+            }
