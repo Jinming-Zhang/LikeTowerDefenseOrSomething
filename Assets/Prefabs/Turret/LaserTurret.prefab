@@ -51,7 +51,7 @@ MonoBehaviour:
   _TargetLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  _WeaponSocket: {fileID: 0}
+  _WeaponSocket: {fileID: 727761343839036139}
   _Weapon: {fileID: 8219258433211320693}
   _TurretHeads: []
   _GizmosColor: {r: 0, g: 1, b: 1, a: 1}
@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 8445247315447318513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.059998035, y: 8.431, z: 4.533997}
+  m_LocalPosition: {x: 0.059998035, y: 7.91, z: 4.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5024283483773974931, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: _MaxRange
-      value: 63
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5024283483773974931, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: _DamageLayers.m_Bits
