@@ -26,7 +26,7 @@ public class PathNode : MonoBehaviour
             PathNode p = child.GetComponent<PathNode>();
             if (p != null)
             {
-                // p.InitPath();
+                p.InitPath();
                 _Next.Add(p);
             }
         }

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public enum EnemyStatus
@@ -40,6 +41,7 @@ public class EnemyBase : MonoBehaviour
         _MovementModule = GetComponent<NavAIMovement>();
         _AttackModule = GetComponent<EnemyAttackModule>();
         EnemyStatus = EnemyStatus.Idling;
+        _MovementModule.SetSpeed(_MoveSpeed);
     }
 
     public void Initialize(PathNode navPath)
@@ -73,8 +75,11 @@ public class EnemyBase : MonoBehaviour
             EnemyAttackable attackable = hit.GetComponent<EnemyAttackable>();
             if (attackable != null)
             {
-                target = attackable;
-                return true;
+                if (!_StraightToBase || attackable.GetComponent<BaseNexus>() != null)
+                {
+                    target = attackable;
+                    return true;
+                }
             }
         }
 

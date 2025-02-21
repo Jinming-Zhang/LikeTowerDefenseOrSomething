@@ -198,7 +198,6 @@ GameObject:
   - component: {fileID: 7477416876172497570}
   - component: {fileID: 4097693463991374169}
   - component: {fileID: 8671441365127444624}
-  - component: {fileID: 2663041977608025295}
   - component: {fileID: 6657470759922165524}
   m_Layer: 5
   m_Name: HealthBarUI_Worldspace
@@ -272,24 +271,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &2663041977608025295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5056264582751373283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6657470759922165524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7215d29fdaf554b9b7b390e979e93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HealthTarget: {fileID: 0}
   _Foreground: {fileID: 4693048075003803477}
 --- !u!1 &6390850820102889393
 GameObject:
