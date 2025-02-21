@@ -1,4 +1,12 @@
+using System.ComponentModel;
 using UnityEngine;
+
+public enum EnemyStatus
+{
+    Idling,
+    Walking,
+    Attacking
+}
 
 [RequireComponent(typeof(NavAIMovement),
     typeof(EnemyAttackModule),
@@ -6,15 +14,25 @@ using UnityEngine;
 )]
 public class EnemyBase : MonoBehaviour
 {
-    [Header("Enemy Configs")]
-    [SerializeField] private float _Health = 2;
+    [Header("Basic Enemy Configs")]
     [SerializeField] private float _Damage = 3;
     [SerializeField] private float _MoveSpeed = 2;
+
+    [Header("Other Configs")]
+    [SerializeField] private bool _StraightToBase = false;
     [SerializeField] private float _AtkSpeedPerSec = 2;
     [SerializeField] private float _AtkRange = 20;
 
+    public EnemyStatus EnemyStatus { get; set; }
     private NavAIMovement _MovementModule;
     private EnemyAttackModule _AttackModule;
+
+    [Header("Spawning")]
+    public bool spawnEnemies = false;
+    public GameObject enemyToSpawn;
+    public float spawnCooldown = 5f;
+    private float spawnCooldownTimer = 0f;
+
     [Header("Debug")]
     [SerializeField] private Color _RangeColor = Color.red;
 
@@ -22,6 +40,8 @@ public class EnemyBase : MonoBehaviour
     {
         _MovementModule = GetComponent<NavAIMovement>();
         _AttackModule = GetComponent<EnemyAttackModule>();
+        EnemyStatus = EnemyStatus.Idling;
+        _MovementModule.SetSpeed(_MoveSpeed);
     }
 
     public void Initialize(PathNode navPath)
@@ -37,10 +57,13 @@ public class EnemyBase : MonoBehaviour
         {
             _MovementModule.Pause();
             _AttackModule.Attack(target);
+            EnemyStatus = EnemyStatus.Attacking;
         }
         else
         {
             _MovementModule.Resume();
+            EnemyStatus = EnemyStatus.Walking;
+            HandleEnemySpawning();
         }
     }
 
@@ -52,8 +75,11 @@ public class EnemyBase : MonoBehaviour
             EnemyAttackable attackable = hit.GetComponent<EnemyAttackable>();
             if (attackable != null)
             {
-                target = attackable;
-                return true;
+                if (!_StraightToBase || attackable.GetComponent<BaseNexus>() != null)
+                {
+                    target = attackable;
+                    return true;
+                }
             }
         }
 
@@ -61,6 +87,20 @@ public class EnemyBase : MonoBehaviour
         return false;
     }
 
+
+    private void HandleEnemySpawning()
+    {
+        if (spawnEnemies && enemyToSpawn != null)
+        {
+            spawnCooldownTimer -= Time.deltaTime;
+
+            if (spawnCooldownTimer <= 0f)
+            {
+                Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+                spawnCooldownTimer = spawnCooldown;
+            }
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {

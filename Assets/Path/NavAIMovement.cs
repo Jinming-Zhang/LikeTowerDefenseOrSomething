@@ -6,10 +6,24 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavAIMovement : MonoBehaviour
 {
-    private NavMeshAgent _Agent;
     [SerializeField] private PathNode _PathNode;
-    [SerializeField] private float _Tolerance = 60.0f;
 
+    private NavMeshAgent _AgentIns;
+
+    private NavMeshAgent _Agent
+    {
+        get
+        {
+            if (_AgentIns == null)
+            {
+                _AgentIns = GetComponent<NavMeshAgent>();
+            }
+
+            return _AgentIns;
+        }
+    }
+
+    [SerializeField] private float _Tolerance = 20.0f;
     private Coroutine _MoveCoroutine;
 
     public void Initialize(float mvSpd, PathNode pathStartNode)
@@ -18,9 +32,9 @@ public class NavAIMovement : MonoBehaviour
         _PathNode = pathStartNode;
     }
 
-    private void Awake()
+    public void SetSpeed(float speed)
     {
-        _Agent = GetComponent<NavMeshAgent>();
+        _Agent.speed = speed;
     }
 
     private void Update()

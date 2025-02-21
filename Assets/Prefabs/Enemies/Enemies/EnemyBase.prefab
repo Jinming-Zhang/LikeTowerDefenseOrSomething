@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8202416068283186925}
   - component: {fileID: 6892124386332815612}
-  - component: {fileID: 6053046910153026723}
-  - component: {fileID: 6544133121067749008}
-  - component: {fileID: 7907502313455053077}
   - component: {fileID: 568192353455765901}
+  - component: {fileID: 7907502313455053077}
+  - component: {fileID: 6544133121067749008}
+  - component: {fileID: 3317848137955535093}
   - component: {fileID: 4884532376988287517}
+  - component: {fileID: 6053046910153026723}
   m_Layer: 6
   m_Name: EnemyBase
   m_TagString: Untagged
@@ -51,60 +52,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fa58ca4c2b80744a1daf39cdac918f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Health: 200
   _Damage: 20
   _MoveSpeed: 20
+  _StraightToBase: 0
   _AtkSpeedPerSec: 2
   _AtkRange: 20
+  spawnEnemies: 0
+  enemyToSpawn: {fileID: 0}
+  spawnCooldown: 5
   _RangeColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!195 &6053046910153026723
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336782068091971797}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 2.21
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 3600
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 10.6
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &6544133121067749008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336782068091971797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e389d9c87df2946845278336d99f90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _PathNode: {fileID: 0}
-  _Tolerance: 70
---- !u!114 &7907502313455053077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336782068091971797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fda2f52d3c5a249ab2710a29c6443c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &568192353455765901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +78,61 @@ MonoBehaviour:
   maxHealth: 50
   spawnEnemyOnDeath: 0
   SpawnOnDeathEnemy: {fileID: 0}
+  explodeOnDeath: 0
+--- !u!114 &7907502313455053077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336782068091971797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fda2f52d3c5a249ab2710a29c6443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3317848137955535093}
+        m_TargetAssemblyTypeName: EnemyAnimationController, Assembly-CSharp
+        m_MethodName: OnAttacking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6544133121067749008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336782068091971797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e389d9c87df2946845278336d99f90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _PathNode: {fileID: 0}
+  _Tolerance: 10
+--- !u!114 &3317848137955535093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336782068091971797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ad4b8c8d89cbe047aa5fce4713de5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EnemyAnimator: {fileID: 0}
 --- !u!136 &4884532376988287517
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -145,6 +156,28 @@ CapsuleCollider:
   m_Height: 10.473263
   m_Direction: 1
   m_Center: {x: 0, y: 5.2288456, z: 0}
+--- !u!195 &6053046910153026723
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336782068091971797}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 2.21
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 3600
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 10.6
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7958798142731583882
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,72 +206,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5001482032057566820}
+  m_Children: []
   m_Father: {fileID: 8202416068283186925}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &923673096767688224
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 7443344427732684495}
-    m_Modifications:
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8771091787928289351, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-      propertyPath: m_Name
-      value: Droid
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: -4161369568681901532, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
---- !u!4 &5001482032057566820 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -3910990755373119420, guid: 3f232be08ee38bc468ba3a45854069f6, type: 3}
-  m_PrefabInstance: {fileID: 923673096767688224}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6544095010937493555
 PrefabInstance:
   m_ObjectHideFlags: 0

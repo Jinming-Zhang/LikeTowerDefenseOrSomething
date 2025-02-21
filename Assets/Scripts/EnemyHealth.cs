@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyHealth : HealthComponent
 {
     public Resources resources;
+    [HideInInspector]
     public float health;
     public float maxHealth = 15f;
     public bool spawnEnemyOnDeath = false;
