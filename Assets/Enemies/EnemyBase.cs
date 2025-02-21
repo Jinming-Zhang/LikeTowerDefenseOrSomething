@@ -12,9 +12,16 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] private float _MoveSpeed = 2;
     [SerializeField] private float _AtkSpeedPerSec = 2;
     [SerializeField] private float _AtkRange = 20;
+    [SerializeField] private bool _StraightToBase = false;
 
     private NavAIMovement _MovementModule;
     private EnemyAttackModule _AttackModule;
+
+    [Header("Spawning")]
+    public bool spawnEnemies = false;
+    public GameObject enemyToSpawn;
+    public float spawnCooldown = 5f;
+    private float spawnCooldownTimer = 0f;
     [Header("Debug")]
     [SerializeField] private Color _RangeColor = Color.red;
 
@@ -41,6 +48,7 @@ public class EnemyBase : MonoBehaviour
         else
         {
             _MovementModule.Resume();
+            HandleEnemySpawning();
         }
     }
 
@@ -61,6 +69,20 @@ public class EnemyBase : MonoBehaviour
         return false;
     }
 
+
+    private void HandleEnemySpawning()
+    {
+        if (spawnEnemies && enemyToSpawn != null)
+        {
+            spawnCooldownTimer -= Time.deltaTime;
+
+            if (spawnCooldownTimer <= 0f)
+            {
+                Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+                spawnCooldownTimer = spawnCooldown;
+            }
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
