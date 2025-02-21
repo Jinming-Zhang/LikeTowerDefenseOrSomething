@@ -12,7 +12,7 @@ public class TurretPlacer: MonoBehaviour
     [SerializeField] RangeSphere threatRangeSphere;
     FollowCursor followCursor;
     [Space(15)]
-    public GameObject deleteIcon;
+    public GameObject[] deleteIcons;
     public GameObject placementMessage;
     public GameObject deletionMessage;
 
@@ -105,15 +105,20 @@ public class TurretPlacer: MonoBehaviour
 
     public void ToggleDeleteIcon(bool isActive)
     {
-        if(deleteIcon == null)
+        /*if(deleteIcon == null)
         {
             Debug.LogError("[" + gameObject.name + "]: Please drag the Delete Icon under UI Cursor Follower into its respective slot (under \"TurretPlacer\") in the inspector.");
         }
-        else { deleteIcon.SetActive(isActive); }
+        else { deleteIcon.SetActive(isActive); }*/
 
-        if (deletionMessage == null)
-        { Debug.LogWarning("No delete mode message detected."); }
-        else { deletionMessage.SetActive(isActive); }
+        foreach(GameObject go in deleteIcons)
+        {
+            go.SetActive(isActive);
+        }
+
+        //if (deletionMessage == null)
+        //{ Debug.LogWarning("No delete mode message detected."); }
+        //else { deletionMessage.SetActive(isActive); }
     }
 
     public void TryDeleteTurret()
