@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Apply to Enemies
-
 public class EnemyHealth : HealthComponent
 {
     public Resources resources;
@@ -11,6 +9,7 @@ public class EnemyHealth : HealthComponent
     public float maxHealth = 15f;
     public bool spawnEnemyOnDeath = false;
     public GameObject SpawnOnDeathEnemy;
+    public bool explodeOnDeath = false;
 
     public void Awake()
     {
@@ -33,7 +32,22 @@ public class EnemyHealth : HealthComponent
 
     void Die()
     {
-        //Turn on gravity and disable rigidbody lock here
+        if (explodeOnDeath)
+        {
+            Collider[] playerColliders = Physics.OverlapSphere(transform.position, 25f);
+            foreach (Collider playerCollider in playerColliders)
+            {
+                if (playerCollider.CompareTag("PlayerObject"))
+                {
+                    PlayerObjectHealth playerObjHealth = playerCollider.GetComponent<PlayerObjectHealth>();
+                    if (playerObjHealth != null)
+                    {
+                        playerObjHealth.TakeDamage(10f);
+                    }
+                }
+            }
+        }
+
         if (spawnEnemyOnDeath)
         {
             Instantiate(SpawnOnDeathEnemy);
