@@ -15,6 +15,7 @@ public class NavAIMovement : MonoBehaviour
     public void Initialize(float mvSpd, PathNode pathStartNode)
     {
         _Agent.speed = mvSpd;
+        _Tolerance = _Agent.speed * 1.2f;
         _PathNode = pathStartNode;
     }
 

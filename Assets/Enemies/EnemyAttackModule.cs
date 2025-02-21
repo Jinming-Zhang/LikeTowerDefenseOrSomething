@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyAttackModule : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class EnemyAttackModule : MonoBehaviour
     private float _AtkSpeedPerSec = 2;
 
     private float _AtkCdCounter;
+    [SerializeField] private UnityEvent OnAttack;
 
     public void Initialize(float dmg, float speed)
     {
@@ -35,6 +37,7 @@ public class EnemyAttackModule : MonoBehaviour
         transform.forward = forwardDir;
         _AtkCdCounter = 1.0f / _AtkSpeedPerSec;
         target.TakeDamage(_Damage);
+        OnAttack?.Invoke();
     }
 
     private void Update()

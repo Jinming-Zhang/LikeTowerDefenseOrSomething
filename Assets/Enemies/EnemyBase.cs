@@ -1,19 +1,28 @@
 using UnityEngine;
 
+public enum EnemyStatus
+{
+    Idling,
+    Walking,
+    Attacking
+}
+
 [RequireComponent(typeof(NavAIMovement),
     typeof(EnemyAttackModule),
     typeof(EnemyHealth)
 )]
 public class EnemyBase : MonoBehaviour
 {
-    [Header("Enemy Configs")]
-    [SerializeField] private float _Health = 2;
+    [Header("Basic Enemy Configs")]
     [SerializeField] private float _Damage = 3;
     [SerializeField] private float _MoveSpeed = 2;
+
+    [Header("Other Configs")]
+    [SerializeField] private bool _StraightToBase = false;
     [SerializeField] private float _AtkSpeedPerSec = 2;
     [SerializeField] private float _AtkRange = 20;
-    [SerializeField] private bool _StraightToBase = false;
 
+    public EnemyStatus EnemyStatus { get; set; }
     private NavAIMovement _MovementModule;
     private EnemyAttackModule _AttackModule;
 
@@ -22,6 +31,7 @@ public class EnemyBase : MonoBehaviour
     public GameObject enemyToSpawn;
     public float spawnCooldown = 5f;
     private float spawnCooldownTimer = 0f;
+
     [Header("Debug")]
     [SerializeField] private Color _RangeColor = Color.red;
 
@@ -29,6 +39,7 @@ public class EnemyBase : MonoBehaviour
     {
         _MovementModule = GetComponent<NavAIMovement>();
         _AttackModule = GetComponent<EnemyAttackModule>();
+        EnemyStatus = EnemyStatus.Idling;
     }
 
     public void Initialize(PathNode navPath)
@@ -44,10 +55,12 @@ public class EnemyBase : MonoBehaviour
         {
             _MovementModule.Pause();
             _AttackModule.Attack(target);
+            EnemyStatus = EnemyStatus.Attacking;
         }
         else
         {
             _MovementModule.Resume();
+            EnemyStatus = EnemyStatus.Walking;
             HandleEnemySpawning();
         }
     }

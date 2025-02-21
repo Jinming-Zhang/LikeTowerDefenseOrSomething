@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7759c28c92b0a0348a8564aaecc830cc
+guid: e126d4c12004cdf4fb521f46367c52c3
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -13,7 +13,7 @@ ScriptedImporter:
   importSettings:
     nodeNameMethod: 1
     animationMethod: 2
-    generateMipMaps: 0
+    generateMipMaps: 1
     texturesReadable: 0
     defaultMinFilterMode: 9729
     defaultMagFilterMode: 9729
@@ -30,6 +30,3 @@ ScriptedImporter:
     code: 20
     messages:
     - KHR_materials_specular
-  - type: 3
-    code: 36
-    messages: []
