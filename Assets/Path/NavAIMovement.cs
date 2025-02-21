@@ -8,21 +8,28 @@ public class NavAIMovement : MonoBehaviour
 {
     [SerializeField] private PathNode _PathNode;
 
-    private NavMeshAgent _Agent;
-    private float _Tolerance = 60.0f;
+    private NavMeshAgent _AgentIns;
+
+    private NavMeshAgent _Agent
+    {
+        get
+        {
+            if (_AgentIns == null)
+            {
+                _AgentIns = GetComponent<NavMeshAgent>();
+            }
+
+            return _AgentIns;
+        }
+    }
+
+    [SerializeField] private float _Tolerance = 20.0f;
     private Coroutine _MoveCoroutine;
 
     public void Initialize(float mvSpd, PathNode pathStartNode)
     {
-        _Agent = GetComponent<NavMeshAgent>();
         _Agent.speed = mvSpd;
-        _Tolerance = _Agent.speed;
         _PathNode = pathStartNode;
-    }
-
-    private void Awake()
-    {
-        _Agent = GetComponent<NavMeshAgent>();
     }
 
     public void SetSpeed(float speed)

@@ -16,6 +16,30 @@ PrefabInstance:
       propertyPath: _EnemyAnimator
       value: 
       objectReference: {fileID: 7484214150551842720}
+    - target: {fileID: 4884532376988287517, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Acceleration
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6892124386332815612, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: _Damage
       value: 2
@@ -26,7 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6892124386332815612, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: _MoveSpeed
-      value: 10
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6892124386332815612, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: _AtkSpeedPerSec
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7336782068091971797, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: m_Name
