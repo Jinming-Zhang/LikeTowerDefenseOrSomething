@@ -29,7 +29,7 @@ public class EnemyBase : MonoBehaviour
 
     [Header("Spawning")]
     public bool spawnEnemies = false;
-    public GameObject enemyToSpawn;
+    public EnemyBase enemyToSpawn;
     public float spawnCooldown = 5f;
     private float spawnCooldownTimer = 0f;
 
@@ -96,7 +96,8 @@ public class EnemyBase : MonoBehaviour
 
             if (spawnCooldownTimer <= 0f)
             {
-                Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+                EnemyBase enemy = Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
+                enemy.Initialize(_MovementModule.GetCurrentPathNode());
                 spawnCooldownTimer = spawnCooldown;
             }
         }
