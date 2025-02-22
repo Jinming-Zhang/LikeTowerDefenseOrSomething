@@ -19,6 +19,7 @@ public class EnemyHealth : HealthComponent
     [SerializeField] private List<AudioClip> _DeadSfxs = new();
     private float _AttacedSfxCdCounter;
     private bool _DeathSfxPlayed = false;
+    public GameObject deathExplosionParticles;
 
     public void Awake()
     {
@@ -60,6 +61,11 @@ public class EnemyHealth : HealthComponent
     {
         if (explodeOnDeath)
         {
+            if (deathExplosionParticles != null)
+            {
+                Instantiate(deathExplosionParticles, transform.position, Quaternion.identity);
+            }
+
             Collider[] playerColliders = Physics.OverlapSphere(transform.position, 25f);
             foreach (Collider playerCollider in playerColliders)
             {
