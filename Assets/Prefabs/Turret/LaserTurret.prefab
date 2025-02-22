@@ -72,6 +72,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Health: 50
+  _DamagedSfxCd: 0.15
+  _DamagedSfxs:
+  - {fileID: 8300000, guid: 414e4e0b35bbd0b49b45258db056bb6a, type: 3}
+  - {fileID: 8300000, guid: 405a033e7fc65324086f87bc30964c29, type: 3}
+  - {fileID: 8300000, guid: 02adeada8458235418227a1c39db7423, type: 3}
 --- !u!114 &4094612404730690560
 MonoBehaviour:
   m_ObjectHideFlags: 0

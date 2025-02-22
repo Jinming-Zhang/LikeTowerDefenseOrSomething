@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AudioManager : MonoBehaviour
 {
@@ -25,6 +26,16 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip sfxClip, float volume = 1.0f, Vector3 position = default)
     {
         AudioSource.PlayClipAtPoint(sfxClip, position, volume);
+    }
+
+    public void PlaySFXRandom(List<AudioClip> sfxClips, float volume = 1.0f, Vector3 position = default)
+    {
+        if (sfxClips == null || sfxClips.Count <= 0)
+        {
+            return;
+        }
+
+        AudioSource.PlayClipAtPoint(sfxClips[Random.Range(0, sfxClips.Count)], Camera.main.gameObject.transform.position, volume);
     }
 
     public void PlayMusic(AudioClip musicClip, float transitionDuration = 1.0f, float volume = 1.0f, bool loop = true)

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyHealth : HealthComponent
 {
@@ -11,15 +13,28 @@ public class EnemyHealth : HealthComponent
     public bool spawnEnemyOnDeath = false;
     public EnemyBase SpawnOnDeathEnemy;
     public bool explodeOnDeath = false;
+    [Header("Sfx")]
+    [SerializeField] private float _AttackedSfxCd = 0.1f;
+    [SerializeField] private List<AudioClip> _AttackedSfxs = new();
+    [SerializeField] private List<AudioClip> _DeadSfxs = new();
+    private float _AttacedSfxCdCounter;
+    private bool _DeathSfxPlayed = false;
 
     public void Awake()
     {
         health = maxHealth;
+        _AttacedSfxCdCounter = _AttackedSfxCd;
+    }
+
+    private void Update()
+    {
+        _AttacedSfxCdCounter = Mathf.Max(0, _AttacedSfxCdCounter - Time.deltaTime);
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        PlayDamagedSFX();
         if (resources != null && resources.gainFromDamage)
         {
             resources.amount += 1;
@@ -30,6 +45,16 @@ public class EnemyHealth : HealthComponent
             Die();
         }
     }
+
+    private void PlayDamagedSFX()
+    {
+        if (_AttacedSfxCdCounter <= 0)
+        {
+            AudioManager.Instance.PlaySFXRandom(_AttackedSfxs);
+            _AttacedSfxCdCounter = _AttackedSfxCd;
+        }
+    }
+
 
     void Die()
     {
@@ -58,6 +83,12 @@ public class EnemyHealth : HealthComponent
         if (resources != null && resources.gainFromKill)
         {
             resources.amount += maxHealth;
+        }
+
+        if (!_DeathSfxPlayed)
+        {
+            AudioManager.Instance?.PlaySFXRandom(_DeadSfxs);
+            _DeathSfxPlayed = true;
         }
 
         Destroy(gameObject);
