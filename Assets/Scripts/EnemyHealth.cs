@@ -11,6 +11,7 @@ public class EnemyHealth : HealthComponent
     public bool spawnEnemyOnDeath = false;
     public EnemyBase SpawnOnDeathEnemy;
     public bool explodeOnDeath = false;
+    public GameObject deathExplosionParticles;
 
     public void Awake()
     {
@@ -35,6 +36,11 @@ public class EnemyHealth : HealthComponent
     {
         if (explodeOnDeath)
         {
+            if (deathExplosionParticles != null)
+            {
+                Instantiate(deathExplosionParticles, transform.position, Quaternion.identity);
+            }
+
             Collider[] playerColliders = Physics.OverlapSphere(transform.position, 25f);
             foreach (Collider playerCollider in playerColliders)
             {
