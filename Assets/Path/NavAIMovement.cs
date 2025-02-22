@@ -65,4 +65,9 @@ public class NavAIMovement : MonoBehaviour
     {
         _Agent.enabled = true;
     }
+
+    public PathNode GetCurrentPathNode()
+    {
+        return _PathNode;
+    }
 }

@@ -9,7 +9,7 @@ public class EnemyHealth : HealthComponent
     public float health;
     public float maxHealth = 15f;
     public bool spawnEnemyOnDeath = false;
-    public GameObject SpawnOnDeathEnemy;
+    public EnemyBase SpawnOnDeathEnemy;
     public bool explodeOnDeath = false;
 
     public void Awake()
@@ -51,7 +51,8 @@ public class EnemyHealth : HealthComponent
 
         if (spawnEnemyOnDeath)
         {
-            Instantiate(SpawnOnDeathEnemy);
+            EnemyBase enemy = Instantiate(SpawnOnDeathEnemy);
+            enemy.Initialize(GetComponent<NavAIMovement>().GetCurrentPathNode());
         }
 
         if (resources != null && resources.gainFromKill)
