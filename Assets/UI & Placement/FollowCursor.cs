@@ -38,6 +38,7 @@ public class FollowCursor : MonoBehaviour
         bool hitSomething = Physics.Raycast(camRay, out hitInfo, 1000f, LayerMask.GetMask(placementMasks));
 
         if (hitSomething) { transform.position = hitInfo.point; }
+        else { Debug.Log("Hit nothing?"); }
     }
 
     public void InfoScan(Ray camRay, RaycastHit hitInfo)
