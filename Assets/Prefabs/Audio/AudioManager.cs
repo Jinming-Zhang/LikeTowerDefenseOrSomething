@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        AudioSource.PlayClipAtPoint(sfxClips[Random.Range(0, sfxClips.Count)], Camera.main.gameObject.transform.position, volume);
+        AudioSource.PlayClipAtPoint(sfxClips[Random.Range(0, sfxClips.Count)], position, volume);
     }
 
     public void PlayMusic(AudioClip musicClip, float transitionDuration = 1.0f, float volume = 1.0f, bool loop = true)

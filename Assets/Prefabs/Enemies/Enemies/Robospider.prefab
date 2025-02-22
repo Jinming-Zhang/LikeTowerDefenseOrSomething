@@ -20,6 +20,22 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: fc3aff8a394b89e4b957b7b5ccd95178, type: 3}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fc3aff8a394b89e4b957b7b5ccd95178, type: 3}
     - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: m_Height
       value: 1
@@ -59,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 7336782068091971797, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: m_Name
       value: Robospider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: _AttackSfxVol
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: _AttackSfxs.Array.size

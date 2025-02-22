@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class NavAIMovement : MonoBehaviour
 {
     [SerializeField] private PathNode _PathNode;
+    [SerializeField] private AudioSource _AudioSource;
+
 
     private NavMeshAgent _AgentIns;
 
@@ -37,6 +39,11 @@ public class NavAIMovement : MonoBehaviour
         _Agent.speed = speed;
     }
 
+    private void Start()
+    {
+        _AudioSource.Play();
+    }
+
     private void Update()
     {
         if (_PathNode == null || !_Agent.enabled)
@@ -49,6 +56,7 @@ public class NavAIMovement : MonoBehaviour
             _PathNode = _PathNode.GetNextNode();
             if (_PathNode == null)
             {
+                // _AudioSource.Stop();
                 return;
             }
         }
@@ -59,11 +67,13 @@ public class NavAIMovement : MonoBehaviour
     public void Pause()
     {
         _Agent.enabled = false;
+        _AudioSource.Pause();
     }
 
     public void Resume()
     {
         _Agent.enabled = true;
+        _AudioSource.UnPause();
     }
 
     public PathNode GetCurrentPathNode()

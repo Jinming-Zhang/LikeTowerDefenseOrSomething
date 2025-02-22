@@ -14,6 +14,7 @@ public class EnemyHealth : HealthComponent
     public EnemyBase SpawnOnDeathEnemy;
     public bool explodeOnDeath = false;
     [Header("Sfx")]
+    [SerializeField] private float _SfxVolume = 0.25f;
     [SerializeField] private float _AttackedSfxCd = 0.1f;
     [SerializeField] private List<AudioClip> _AttackedSfxs = new();
     [SerializeField] private List<AudioClip> _DeadSfxs = new();
@@ -51,7 +52,7 @@ public class EnemyHealth : HealthComponent
     {
         if (_AttacedSfxCdCounter <= 0)
         {
-            AudioManager.Instance.PlaySFXRandom(_AttackedSfxs);
+            AudioManager.Instance.PlaySFXRandom(_AttackedSfxs, _SfxVolume, transform.position);
             _AttacedSfxCdCounter = _AttackedSfxCd;
         }
     }
@@ -93,7 +94,7 @@ public class EnemyHealth : HealthComponent
 
         if (!_DeathSfxPlayed)
         {
-            AudioManager.Instance?.PlaySFXRandom(_DeadSfxs);
+            AudioManager.Instance?.PlaySFXRandom(_DeadSfxs, _SfxVolume, transform.position);
             _DeathSfxPlayed = true;
         }
 
