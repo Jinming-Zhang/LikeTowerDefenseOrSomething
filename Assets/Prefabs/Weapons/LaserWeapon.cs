@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class LaserWeapon : Weapon
 {
-    [Header("Weapon Config")]
-    [SerializeField] private float _Radius = 0.2f;
-
-    [SerializeField] private float _MaxRange = 10.0f;
+    [SerializeField] protected float _Radius = 0.2f;
     [SerializeField] private float _DmgPerSec = 2;
-    [SerializeField] private LayerMask _DamageLayers;
-
     [Header("Visuals")]
     [SerializeField] private LaserLine _LaserVisual;
 
-    [Header("Debug")]
-    [SerializeField] private Color _DebugRangeColor = Color.red;
 
     private GameObject _CurrentTarget;
 
@@ -88,13 +81,6 @@ public class LaserWeapon : Weapon
         return true;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        var oldClr = Gizmos.color;
-        Gizmos.color = _DebugRangeColor;
-        Gizmos.DrawWireSphere(transform.position, _MaxRange);
-        Gizmos.color = oldClr;
-    }
 
     private void RotateTowardsTarget()
     {

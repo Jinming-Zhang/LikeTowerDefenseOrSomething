@@ -14,17 +14,22 @@ public class Turret : MonoBehaviour
     } // I need to read this for UI purposes - Dax
 
     [SerializeField] private LayerMask _TargetLayers;
-
     [Header("Weapon")]
     [SerializeField] private Transform _WeaponSocket;
-
     [SerializeField] private Weapon _Weapon;
-
-
     [SerializeField] private List<GameObject> _TurretHeads;
 
+    [SerializeField] private bool _RotateRoot;
     [Header("Debug")]
     [SerializeField] private Color _GizmosColor = Color.cyan;
+
+    private void Start()
+    {
+        if (_Weapon != null)
+        {
+            _Weapon.SetRange(_Range);
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,6 +65,11 @@ public class Turret : MonoBehaviour
 
     private void ShootTarget(Transform target)
     {
+        if (_Weapon == null)
+        {
+            return;
+        }
+
         _Weapon.Shoot(target.gameObject);
         foreach (GameObject turretHead in _TurretHeads)
         {
@@ -67,16 +77,47 @@ public class Turret : MonoBehaviour
         }
     }
 
+    public void RotateToTarget(Transform target)
+    {
+        if (_RotateRoot)
+        {
+            Vector3 dir = target.position - transform.position;
+            dir.y = transform.position.y;
+            transform.forward = dir;
+            // float dot = Vector3.Dot(transform.forward, dir.normalized);
+            // float angle = Mathf.Acos(dot);
+            // bool rotLeft = Vector3.Cross(dir.normalized, transform.forward).y <= 0;
+            // angle = rotLeft ? angle : -angle;
+            // transform.Rotate(0, angle, 0);
+        }
+        else
+        {
+            foreach (GameObject turretHead in _TurretHeads)
+            {
+                RotateToTarget(turretHead.transform, target);
+            }
+        }
+    }
+
     private void RotateToTarget(Transform src, Transform target)
     {
-        Vector3 tarloc = target.position;
-        tarloc.y = transform.position.y;
-        Vector3 targetRight = src.position - tarloc;
-        float dot = Vector3.Dot(src.right.normalized, targetRight.normalized);
-        float angle = Mathf.Acos(dot);
-        bool rotLeft = Vector3.Cross(targetRight, src.right).y <= 0;
-        angle = rotLeft ? angle : -angle;
-        src.RotateAround(transform.position, Vector3.up, angle);
+        if (_RotateRoot)
+        {
+            Vector3 lookDir = target.position - transform.position;
+            lookDir.y = transform.position.y;
+            transform.forward = lookDir;
+        }
+        else
+        {
+            Vector3 tarloc = target.position;
+            tarloc.y = transform.position.y;
+            Vector3 targetRight = src.position - tarloc;
+            float dot = Vector3.Dot(src.right.normalized, targetRight.normalized);
+            float angle = Mathf.Acos(dot);
+            bool rotLeft = Vector3.Cross(targetRight, src.right).y <= 0;
+            angle = rotLeft ? angle : -angle;
+            src.RotateAround(transform.position, Vector3.up, angle);
+        }
     }
 
 

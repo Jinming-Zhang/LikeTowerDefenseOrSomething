@@ -36,6 +36,7 @@ public class EnemyHealth : HealthComponent
     public void TakeDamage(float damage)
     {
         health -= damage;
+        pHealth?.TakeDamage(damage);
         PlayDamagedSFX();
         if (resources != null && resources.gainFromDamage)
         {

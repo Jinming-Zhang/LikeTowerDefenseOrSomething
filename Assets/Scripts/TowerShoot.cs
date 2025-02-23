@@ -19,8 +19,12 @@ public class TowerShoot : MonoBehaviour
     private Battery nearbyBattery = null;
     private float batteryUsed = 0f;
     public List<Transform> turretHeads = new List<Transform>();
+    [SerializeField] private ProjectileWeapon _Weapon;
 
-    public Battery NearbyBattery { get { return nearbyBattery; } }
+    public Battery NearbyBattery
+    {
+        get { return nearbyBattery; }
+    }
 
     void Start()
     {
@@ -32,6 +36,11 @@ public class TowerShoot : MonoBehaviour
 
     void Update()
     {
+        if (nearbyBattery == null)
+        {
+            FindAndSelectBattery();
+        }
+
         if (!trap && nearbyBattery == null) return;
 
         timeSinceLastShot += Time.deltaTime;
@@ -54,18 +63,18 @@ public class TowerShoot : MonoBehaviour
 
         if (currentTarget != null && timeSinceLastShot >= reloadTime)
         {
-            FaceEnemy(currentTarget.transform);
+            Turret turret = GetComponent<Turret>();
+            if (turret != null)
+            {
+                turret.RotateToTarget(currentTarget.transform);
+            }
+
             StartCoroutine(DealDamageToEnemy(currentTarget, shootAmount));
             timeSinceLastShot = 0f;
         }
         else if (currentTarget == null)
         {
             currentTarget = FindEnemyInRange();
-        }
-
-        if (currentTarget != null)
-        {
-            RotateTurretHeads(currentTarget.transform);
         }
     }
 
@@ -137,28 +146,6 @@ public class TowerShoot : MonoBehaviour
         return closestEnemy;
     }
 
-    void FaceEnemy(Transform enemyTransform) //dont use this
-    {
-        if (trap || pivotPoint == null) return;
-
-        Vector3 direction = enemyTransform.position - pivotPoint.position;
-        direction.y = 0;
-        pivotPoint.rotation = Quaternion.LookRotation(direction);
-    }
-
-    void RotateTurretHeads(Transform target)
-    {
-        foreach (Transform turretHead in turretHeads)
-        {
-            Vector3 targetDirection = target.position - turretHead.position;
-            targetDirection.y = 0; 
-            if (targetDirection.sqrMagnitude > 0f)
-            {
-                turretHead.rotation = Quaternion.LookRotation(targetDirection);
-            }
-        }
-    }
-
     IEnumerator DealDamageToEnemy(Collider enemyCollider, int shootAmount)
     {
         EnemyHealth enemyHealth = enemyCollider.GetComponent<EnemyHealth>();
@@ -169,6 +156,10 @@ public class TowerShoot : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.2f);
                 enemyHealth.TakeDamage(damage);
+                if (_Weapon != null)
+                {
+                    _Weapon.Shoot(enemyCollider.gameObject);
+                }
             }
         }
     }

@@ -13,12 +13,18 @@ public class TurretHealth : HealthComponent
     private float _DamagedSfxCdCounter;
     private bool _IsKilledSfxPlayed = false;
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _CurHealth = _Health;
         _DamagedSfxCdCounter = _DamagedSfxCd;
         _IsKilledSfxPlayed = false;
+        if (pHealth != null)
+        {
+            pHealth.health = _Health;
+            pHealth.maxHealth = _Health;
+        }
     }
 
     private void Update()
@@ -29,6 +35,7 @@ public class TurretHealth : HealthComponent
     public void TakeDmg(float dmg)
     {
         _CurHealth -= dmg;
+        pHealth?.TakeDamage(dmg);
         PlayDamagedSfx();
         if (_CurHealth <= 0)
         {

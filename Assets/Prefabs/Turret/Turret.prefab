@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7616592831758621890}
   - component: {fileID: 1023928962299611385}
   - component: {fileID: 5049450636453680423}
+  - component: {fileID: 3376857580874307375}
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -68,6 +69,7 @@ MonoBehaviour:
   - {fileID: 5515466003006138202}
   - {fileID: 7703616541714855957}
   - {fileID: 1196748174927226158}
+  _RotateRoot: 0
   _GizmosColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &7616592831758621890
 MonoBehaviour:
@@ -82,6 +84,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Health: 100
+  _DamagedSfxCd: 0.15
+  _DamagedSfxs: []
+  _DeadSfxs: []
 --- !u!114 &1023928962299611385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +137,25 @@ CapsuleCollider:
   m_Height: 10.857618
   m_Direction: 1
   m_Center: {x: -0.98480034, y: 4.8293085, z: 0}
+--- !u!114 &3376857580874307375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6429243749851554696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1f43b4c7c027449956c2ed91a3ad88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  isBase: 0
+  energyUsage: 10
+  metalCost: 0
+  displayName: 
+  maxHealth: 15
+  startsAtMaxHealth: 1
 --- !u!1 &6937424045371248034
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,27 +763,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: -4.73
+      value: -83.33
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[0].y
-      value: 7.79
+      value: -77.909996
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[0].z
-      value: 0
+      value: -89.9
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: -4.73
+      value: -83.33
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[1].y
-      value: 7.79
+      value: -77.909996
       objectReference: {fileID: 0}
     - target: {fileID: 3325192791861225753, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Positions.Array.data[1].z
-      value: 7.76
+      value: -82.14
       objectReference: {fileID: 0}
     - target: {fileID: 3784011386126455791, guid: 635663b4d61ad4a44b3a57939f8ee0ca, type: 3}
       propertyPath: m_Layer
