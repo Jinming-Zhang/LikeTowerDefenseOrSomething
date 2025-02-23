@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 5546470432846979333}
   m_Layer: 6
   m_Name: EnemyBase
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,9 +83,9 @@ MonoBehaviour:
   _SfxVolume: 1
   _AttackedSfxCd: 0.5
   _AttackedSfxs:
-  - {fileID: 8300000, guid: c7354f5bc9ba3834986cb3d3301d5999, type: 3}
-  - {fileID: 8300000, guid: 1aa7d93bc008e9445a20ea76461ec92f, type: 3}
-  - {fileID: 8300000, guid: 234731e9992434c4abc1620eff320e63, type: 3}
+  - {fileID: 8300000, guid: c65e1ba2076c7ee42bbca6871a2c75fd, type: 3}
+  - {fileID: 8300000, guid: 903d457db90bb4146bc2d5d704f2626a, type: 3}
+  - {fileID: 8300000, guid: 735ca995602dd534199402d734705a8e, type: 3}
   _DeadSfxs:
   - {fileID: 8300000, guid: 22a12abe360c4cf479db657ccaffdc2b, type: 3}
   - {fileID: 8300000, guid: 58bf3cd948861f54b95b184b68e087d4, type: 3}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0fda2f52d3c5a249ab2710a29c6443c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _AttackSfxVol: 0.5
   OnAttack:
     m_PersistentCalls:
       m_Calls:
@@ -133,7 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PathNode: {fileID: 0}
   _AudioSource: {fileID: 5546470432846979333}
-  _MoveSfx: {fileID: 0}
   _Tolerance: 10
 --- !u!114 &3317848137955535093
 MonoBehaviour:

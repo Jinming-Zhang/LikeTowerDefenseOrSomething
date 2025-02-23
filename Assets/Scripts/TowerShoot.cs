@@ -21,6 +21,10 @@ public class TowerShoot : MonoBehaviour
     public List<Transform> turretHeads = new List<Transform>();
     [SerializeField] private ProjectileWeapon _Weapon;
 
+    [Header("SFX")]
+    [SerializeField] private List<AudioClip> _ShootSFXs;
+    [SerializeField] private float _SFXVolume = 1.0f;
+
     public Battery NearbyBattery
     {
         get { return nearbyBattery; }
@@ -158,6 +162,7 @@ public class TowerShoot : MonoBehaviour
                 enemyHealth.TakeDamage(damage);
                 if (_Weapon != null)
                 {
+                    AudioManager.Instance?.PlaySFXRandom(_ShootSFXs, _SFXVolume, _Weapon.transform.position);
                     _Weapon.Shoot(enemyCollider.gameObject);
                 }
             }

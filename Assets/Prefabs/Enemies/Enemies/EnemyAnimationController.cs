@@ -14,6 +14,11 @@ public class EnemyAnimationController : MonoBehaviour
 
     private void Update()
     {
+        if (_EnemyAnimator == null)
+        {
+            return;
+        }
+
         switch (_EnemyBase.EnemyStatus)
         {
             case EnemyStatus.Idling:
@@ -29,16 +34,31 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void OnAttacking()
     {
+        if (_EnemyAnimator == null)
+        {
+            return;
+        }
+
         _EnemyAnimator.SetTrigger("Attack");
     }
 
     public void OnIdle()
     {
+        if (_EnemyAnimator == null)
+        {
+            return;
+        }
+
         _EnemyAnimator.Play("Idle");
     }
 
     public void OnMoving()
     {
+        if (_EnemyAnimator == null)
+        {
+            return;
+        }
+
         _EnemyAnimator.Play("Move");
     }
 }

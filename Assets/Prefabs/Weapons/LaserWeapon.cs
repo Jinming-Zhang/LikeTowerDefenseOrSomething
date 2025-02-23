@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LaserWeapon : Weapon
 {
@@ -8,7 +10,11 @@ public class LaserWeapon : Weapon
     [SerializeField] private float _DmgPerSec = 2;
     [Header("Visuals")]
     [SerializeField] private LaserLine _LaserVisual;
-
+    [Header("SFXs")]
+    [SerializeField] private List<AudioClip> _StartSfxs;
+    [SerializeField] private List<AudioClip> _ShootingSfxs;
+    [SerializeField] private AudioSource _AudioSource;
+    private bool _PlayedStartSFX = false;
 
     private GameObject _CurrentTarget;
 
@@ -20,6 +26,11 @@ public class LaserWeapon : Weapon
         _LaserVisual.SetActive(false);
     }
 
+    private void Start()
+    {
+        _AudioSource.clip = _StartSfxs[Random.Range(0, _StartSfxs.Count)];
+    }
+
     public override void Shoot(GameObject target)
     {
         if (_CurrentTarget == target)
@@ -28,6 +39,11 @@ public class LaserWeapon : Weapon
         }
 
         _CurrentTarget = target;
+        _AudioSource.clip = _StartSfxs[Random.Range(0, _StartSfxs.Count)];
+        _AudioSource.loop = false;
+        _AudioSource.Play();
+        _PlayedStartSFX = true;
+
         StopAllCoroutines();
         StartCoroutine(ShootCR());
     }
@@ -53,11 +69,22 @@ public class LaserWeapon : Weapon
                 }
             }
 
+            if (_PlayedStartSFX)
+            {
+                if (!_AudioSource.isPlaying)
+                {
+                    _AudioSource.clip = _ShootingSfxs[Random.Range(0, _ShootingSfxs.Count)];
+                    _AudioSource.loop = true;
+                    _AudioSource.Play();
+                }
+            }
+
             yield return new WaitForEndOfFrame();
         }
 
         _CurrentTarget = null;
         _LaserVisual.SetActive(false);
+        _AudioSource.Stop();
     }
 
     private bool IsTargetValid()

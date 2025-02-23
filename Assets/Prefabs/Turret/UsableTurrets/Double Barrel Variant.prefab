@@ -47,7 +47,7 @@ MonoBehaviour:
   _DamageLayers:
     serializedVersion: 2
     m_Bits: 64
-  _Speed: 10
+  _Speed: 50
   _ProjectileTTL: 10
   _Projectile: {fileID: 1217340085285414200, guid: 28f3cc9fda462d0409e1ff832dd40c39, type: 3}
 --- !u!1001 &716966439839626185
@@ -410,6 +410,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: _DeadSfxs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: _DamagedSfxs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: '_DeadSfxs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 412e8c3208dce564bb5d1698c16db624, type: 3}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: '_DamagedSfxs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 414e4e0b35bbd0b49b45258db056bb6a, type: 3}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: '_DamagedSfxs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 405a033e7fc65324086f87bc30964c29, type: 3}
+    - target: {fileID: 7616592831758621890, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
+      propertyPath: '_DamagedSfxs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 02adeada8458235418227a1c39db7423, type: 3}
     - target: {fileID: 7703616541714855957, guid: b80eb3693d360b543be5b02426720b9c, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -472,6 +496,11 @@ MonoBehaviour:
   - {fileID: 1441535606286673227}
   - {fileID: 2442923670037152500}
   _Weapon: {fileID: 5562420107746408479}
+  _ShootSFXs:
+  - {fileID: 8300000, guid: d980eed287e053440924105b6d20ae15, type: 3}
+  - {fileID: 8300000, guid: f46fd57df72bd734a866be0a4fd8ee47, type: 3}
+  - {fileID: 8300000, guid: a8224a9fb827daf4081b970f362438ea, type: 3}
+  _SFXVolume: 1
 --- !u!65 &1425585207915935881
 BoxCollider:
   m_ObjectHideFlags: 0

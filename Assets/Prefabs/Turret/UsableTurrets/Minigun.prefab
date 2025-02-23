@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3086753336175830638
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7532881003457901525}
+    m_Modifications:
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8771091787928289351, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+      propertyPath: m_Name
+      value: Minigun Turret
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: -4161369568681901532, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+--- !u!4 &7164953705662721578 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3910990755373119420, guid: 851d293a9b8cba547987d190e167844c, type: 3}
+  m_PrefabInstance: {fileID: 3086753336175830638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9028363439069193660
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 800139794578987461, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 8.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2857405561631507981, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394742861472278527, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: _ShootSFXs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394742861472278527, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: '_ShootSFXs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ae844b452decac49a36d8fa5c90700a, type: 3}
+    - target: {fileID: 8330856427355308233, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      propertyPath: m_Name
+      value: Minigun
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1567564837988505193, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7164953705662721578}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+--- !u!4 &7532881003457901525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1567564837988505193, guid: 50f52309875c46c4791bc6db2a1782a1, type: 3}
+  m_PrefabInstance: {fileID: 9028363439069193660}
+  m_PrefabAsset: {fileID: 0}
