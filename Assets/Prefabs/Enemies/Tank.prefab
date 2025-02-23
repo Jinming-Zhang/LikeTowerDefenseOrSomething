@@ -151,9 +151,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resources: {fileID: 0}
   health: 20
-  maxHealth: 0
+  maxHealth: 10
   spawnEnemyOnDeath: 0
   SpawnOnDeathEnemy: {fileID: 0}
+  explodeOnDeath: 0
+  deathExplosionParticles: {fileID: 0}
 --- !u!54 &5244402701852238911
 Rigidbody:
   m_ObjectHideFlags: 0

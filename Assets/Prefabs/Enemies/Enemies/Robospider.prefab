@@ -20,6 +20,22 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: fc3aff8a394b89e4b957b7b5ccd95178, type: 3}
+    - target: {fileID: 5546470432846979333, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fc3aff8a394b89e4b957b7b5ccd95178, type: 3}
     - target: {fileID: 6053046910153026723, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: m_Height
       value: 1
@@ -60,6 +76,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robospider
       objectReference: {fileID: 0}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: _AttackSfxVol
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: _AttackSfxs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: '_AttackSfxs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e20cfad3b05f084eab145818045540f, type: 3}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: '_AttackSfxs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: aa7b7479e6cadbd40a1e970caf2be617, type: 3}
+    - target: {fileID: 7907502313455053077, guid: df45a6749c754164494031321da2861b, type: 3}
+      propertyPath: '_AttackSfxs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: c2c45f8e4ccae4c4ebeaa2993e1bb47a, type: 3}
     - target: {fileID: 8202416068283186925, guid: df45a6749c754164494031321da2861b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -83.6

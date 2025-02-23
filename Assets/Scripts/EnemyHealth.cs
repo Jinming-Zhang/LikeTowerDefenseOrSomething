@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyHealth : HealthComponent
 {
@@ -11,15 +13,30 @@ public class EnemyHealth : HealthComponent
     public bool spawnEnemyOnDeath = false;
     public EnemyBase SpawnOnDeathEnemy;
     public bool explodeOnDeath = false;
+    [Header("Sfx")]
+    [SerializeField] private float _SfxVolume = 0.25f;
+    [SerializeField] private float _AttackedSfxCd = 0.1f;
+    [SerializeField] private List<AudioClip> _AttackedSfxs = new();
+    [SerializeField] private List<AudioClip> _DeadSfxs = new();
+    private float _AttacedSfxCdCounter;
+    private bool _DeathSfxPlayed = false;
+    public GameObject deathExplosionParticles;
 
     public void Awake()
     {
         health = maxHealth;
+        _AttacedSfxCdCounter = _AttackedSfxCd;
+    }
+
+    private void Update()
+    {
+        _AttacedSfxCdCounter = Mathf.Max(0, _AttacedSfxCdCounter - Time.deltaTime);
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
+        PlayDamagedSFX();
         if (resources != null && resources.gainFromDamage)
         {
             resources.amount += 1;
@@ -31,10 +48,25 @@ public class EnemyHealth : HealthComponent
         }
     }
 
+    private void PlayDamagedSFX()
+    {
+        if (_AttacedSfxCdCounter <= 0)
+        {
+            AudioManager.Instance.PlaySFXRandom(_AttackedSfxs, _SfxVolume, transform.position);
+            _AttacedSfxCdCounter = _AttackedSfxCd;
+        }
+    }
+
+
     void Die()
     {
         if (explodeOnDeath)
         {
+            if (deathExplosionParticles != null)
+            {
+                Instantiate(deathExplosionParticles, transform.position, Quaternion.identity);
+            }
+
             Collider[] playerColliders = Physics.OverlapSphere(transform.position, 25f);
             foreach (Collider playerCollider in playerColliders)
             {
@@ -58,6 +90,12 @@ public class EnemyHealth : HealthComponent
         if (resources != null && resources.gainFromKill)
         {
             resources.amount += maxHealth;
+        }
+
+        if (!_DeathSfxPlayed)
+        {
+            AudioManager.Instance?.PlaySFXRandom(_DeadSfxs, _SfxVolume, transform.position);
+            _DeathSfxPlayed = true;
         }
 
         Destroy(gameObject);

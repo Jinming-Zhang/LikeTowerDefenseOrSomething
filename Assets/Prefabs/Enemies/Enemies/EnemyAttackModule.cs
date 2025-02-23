@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class EnemyAttackModule : MonoBehaviour
 {
@@ -8,7 +10,9 @@ public class EnemyAttackModule : MonoBehaviour
     private float _AtkSpeedPerSec = 2;
 
     private float _AtkCdCounter;
+    [SerializeField] private float _AttackSfxVol = 0.5f;
     [SerializeField] private UnityEvent OnAttack;
+    [SerializeField] private List<AudioClip> _AttackSfxs = new();
 
     public void Initialize(float dmg, float speed)
     {
@@ -37,6 +41,7 @@ public class EnemyAttackModule : MonoBehaviour
         transform.forward = forwardDir;
         _AtkCdCounter = 1.0f / _AtkSpeedPerSec;
         target.TakeDamage(_Damage);
+        AudioManager.Instance?.PlaySFXRandom(_AttackSfxs, _AttackSfxVol, transform.position);
         OnAttack?.Invoke();
     }
 
